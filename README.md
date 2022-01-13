@@ -1,6 +1,6 @@
 **CMPT 370 Project**
 
-DoubleHappy (Group 33)
+DoubleHappy (Group 32)
 
 Da Liu:
 dal200, dal200@usask.ca
