@@ -1,4 +1,4 @@
-CMPT 370 Project
+**CMPT 370 Project**
 
 DoubleHappy (Group 33)
 
