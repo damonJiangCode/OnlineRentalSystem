@@ -88,24 +88,6 @@
     flex-direction: row;
     justify-content: space-between;
   }
-  .nav-bar-burger-menu {
-    width: 24px;
-    height: 24px;
-  }
-  .nav-bar-mobile-menu {
-    top: 0px;
-    flex: 0 0 auto;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    display: none;
-    padding: var(--dl-space-space-doubleunit);
-    z-index: 100;
-    position: absolute;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #fff;
-  }
   .nav-bar-nav {
     flex: 0 0 auto;
     display: flex;
