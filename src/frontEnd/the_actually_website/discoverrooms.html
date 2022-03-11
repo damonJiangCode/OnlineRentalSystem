@@ -32,12 +32,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     />
     <link rel="stylesheet" href="./style.css" />
+    <link href="./outline-button.css" rel="stylesheet" />
   </head>
-  <!-- start -->
+<!-- start -->
   <body>
     <div>
       <link href="./discoverrooms.css" rel="stylesheet" />
-
+<!-- header -->
       <div class="discoverrooms-container">
         <div class="nav-bar-container nav-bar-root-class-name">
           <nav data-role="Header" class="nav-bar-navbar">
@@ -62,11 +63,72 @@
           </nav>
         </div>
 <!-- filters -->
-        <!-- sort by price
-                filter by rating
-                pet friendly option -->
+        <!-- sort by price, ratings (5,4,3,2,1 stars), filter by ratings, pet friendly option -->
+        <ul class="filter-flex-container">
+            <span>Sort by:</span>
+        
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Price: high-low</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Price: low-high</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: high-low</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: low-high</span></button>
+                </div>
+            </div>
+        </ul>
+        <ul class="filter-flex-container">
+            <span>Filter by:</span>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Pet friendly</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>NOT pet friendly</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 5 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 4 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 3 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 2 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 1 stars</span></button>
+                </div>
+            </div>
+        </ul>
+<!-- filters end -->
 
-        <!-- room card -->
+<!-- room card -->
         <div class="room-card-container room-card-root-class-name1">
           <div class="room-card-container1">
             <img
@@ -106,7 +168,7 @@
           </div>
         </div>
         <!-- room card ends here -->
-        <!-- room card -->
+<!-- room card -->
         <div class="room-card-container room-card-root-class-name1">
             <div class="room-card-container1">
               <img
@@ -146,6 +208,7 @@
             </div>
           </div>
           <!-- room card ends here -->
+<!-- footer -->
         <div class="discoverrooms-footer">
           <div class="discoverrooms-menu">
             <a href="/" class="discoverrooms-navlink">
