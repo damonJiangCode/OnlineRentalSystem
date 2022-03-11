@@ -42,9 +42,25 @@ app.post('/postRoom',function(req,res) {
     var bar = req.body.bar;
     var laundry = req.body.laundry;
 
-    var post = {name: name, desc: desc, address: address,image: image,star: star,price:price,
-        pet:pet, disabledAccess:disabledAccess, wifi:wifi, pool:pool, spa:spa,parking:parking, gym:gym,
-        ac:ac, food:food, bar:bar, laundry:laundry};
+    var post = {
+        name: name, 
+        desc: desc, 
+        address: address,
+        image: image,
+        star: star,
+        price:price,
+        pet:pet, 
+        disabledAccess:disabledAccess, 
+        wifi:wifi, 
+        pool:pool, 
+        spa:spa,
+        parking:parking, 
+        gym:gym,
+        ac:ac, 
+        food:food, 
+        bar:bar, 
+        laundry:laundry
+    };
     console.log(post);
 
     let sql = 'INSERT INTO roominfo SET ?';
@@ -71,6 +87,24 @@ app.post('/delRoom', function(req,res){
     });
 
     res.send("all done");
+})
+
+app.get('/getRooms',function(req,res){
+    let sql = 'SELECT * FROM roominfo';
+    mysqlConnection.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+
+        var response = '';
+    
+        for(let i = 0;i<result.length;i++){
+            response += JSON.stringify(result[i])+',';
+            
+        }
+        response.substring(0, response.length - 1);
+        console.log(response);
+        res.send(result);
+    });
 })
 
 
