@@ -11,7 +11,12 @@
     padding-right: var(--dl-space-space-doubleunit);
     padding-bottom: var(--dl-space-space-halfunit);
     background-color: var(--dl-color-primary-100);
+    cursor: pointer;
   }
+  .solid-button-button:hover{
+    color: white;
+    background-color: black;
+}
   .solid-button-root-class-name {
     left: 0px;
     bottom: 53px;
@@ -211,7 +216,7 @@
   .post-room-page-container1 {
     flex: 0 0 auto;
     width: 1000px;
-    height: 483px;
+    height: auto;
     display: flex;
     position: relative;
     align-items: center;
@@ -220,7 +225,7 @@
   }
   .post-room-page-form {
     width: 50%;
-    height: 394px;
+    height: max-content;
   }
   .post-room-page-text1 {
     margin-top: var(--dl-space-space-unit);
@@ -395,8 +400,8 @@
   .dropbtn {
     background-color: #04AA6D;
     color: white;
-    padding: 16px;
-    font-size: 16px;
+    padding: 14px;
+    font-size: 14px;
     border: none;
   }
   
@@ -410,9 +415,9 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #ffffff;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
   }
   

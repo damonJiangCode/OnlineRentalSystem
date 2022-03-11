@@ -11,6 +11,11 @@
     padding-right: var(--dl-space-space-doubleunit);
     padding-bottom: var(--dl-space-space-halfunit);
     background-color: var(--dl-color-primary-100);
+    cursor: pointer;
+  }
+  .solid-button-button:hover{
+      color: black;
+      background-color: white;
   }
   .solid-button-root-class-name {
     left: 0px;
@@ -40,7 +45,12 @@
     padding-right: var(--dl-space-space-doubleunit);
     padding-bottom: var(--dl-space-space-unit);
     background-color: var(--dl-color-gray-white);
+    cursor: pointer;
   }
+  .outline-button-button:hover{
+    color: #ffffff;
+    background-color: rgb(0, 0, 0);
+}
   
   .place-card-container {
     width: 300px;

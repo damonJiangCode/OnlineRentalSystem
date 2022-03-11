@@ -32,12 +32,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     />
     <link rel="stylesheet" href="./style.css" />
+    <link href="./outline-button.css" rel="stylesheet" />
   </head>
-  <!-- start -->
+<!-- start -->
   <body>
     <div>
       <link href="./discoverrooms.css" rel="stylesheet" />
-
+<!-- header -->
       <div class="discoverrooms-container">
         <div class="nav-bar-container nav-bar-root-class-name">
           <nav data-role="Header" class="nav-bar-navbar">
@@ -61,11 +62,78 @@
             </div>
           </nav>
         </div>
+<!-- filters -->
+        <!-- sort by price, ratings (5,4,3,2,1 stars), filter by ratings, pet friendly option -->
+        <ul class="filter-flex-container">
+            <span>Sort by:</span>
+        
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Price: high-low</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Price: low-high</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: high-low</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: low-high</span></button>
+                </div>
+            </div>
+        </ul>
+        <ul class="filter-flex-container">
+            <span>Filter by:</span>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Pet friendly</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>NOT pet friendly</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 5 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 4 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 3 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 2 stars</span></button>
+                </div>
+            </div>
+            <div>
+                <div class="outline-button-container">
+                <button class="outline-button-button button"><span>Rating: 1 stars</span></button>
+                </div>
+            </div>
+        </ul>
+<!-- filters end -->
+
+<!-- room card -->
         <div class="room-card-container room-card-root-class-name1">
           <div class="room-card-container1">
             <img
               alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
+              src="./public/playground_assets/default-img.svg"
               class="room-card-image"
             />
             <div class="room-card-container2">
@@ -80,38 +148,12 @@
                 <span class="room-card-text3">
                   <span>NOT / Pets friendly</span>
                 </span>
-              </div>
-            </div>
-            <div class="room-card-container6">
-              <span class="room-card-text4"><span>CAD$100</span></span>
-              <span class="room-card-text5"><span>Per Night</span></span>
-              <div class="solid-button-container">
-                <button class="solid-button-button button">
-                  <span>Book Now</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="room-card-container room-card-root-class-name1">
-          <div class="room-card-container1">
-            <img
-              alt="image"
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              class="room-card-image"
-            />
-            <div class="room-card-container2">
-              <h1 class="room-card-text"><span>RoomName</span></h1>
-              <div class="room-card-container3">
-                <div class="room-card-container4">
-                  <div class="room-card-container5">
-                    <span class="room-card-text1"><span>1 bedroom</span></span>
-                  </div>
-                  <span class="room-card-text2"><span>1 bathroom</span></span>
-                </div>
                 <span class="room-card-text3">
-                  <span>NOT / Pets friendly</span>
-                </span>
+                    <span>Owner's info: </span>
+                  </span>
+                  <span class="room-card-text3">
+                    <span>Phone number: +1 (XXX)XXX-XXXX</span>
+                  </span>
               </div>
             </div>
             <div class="room-card-container6">
@@ -125,9 +167,51 @@
             </div>
           </div>
         </div>
+        <!-- room card ends here -->
+<!-- room card -->
+        <div class="room-card-container room-card-root-class-name1">
+            <div class="room-card-container1">
+              <img
+                alt="image"
+                src="./public/playground_assets/default-img.svg"
+                class="room-card-image"
+              />
+              <div class="room-card-container2">
+                <h1 class="room-card-text"><span>RoomName</span></h1>
+                <div class="room-card-container3">
+                  <div class="room-card-container4">
+                    <div class="room-card-container5">
+                      <span class="room-card-text1"><span>1 bedroom</span></span>
+                    </div>
+                    <span class="room-card-text2"><span>1 bathroom</span></span>
+                  </div>
+                  <span class="room-card-text3">
+                    <span>NOT / Pets friendly</span>
+                  </span>
+                  <span class="room-card-text3">
+                      <span>Owner's info: </span>
+                    </span>
+                    <span class="room-card-text3">
+                      <span>Phone number: +1 (XXX)XXX-XXXX</span>
+                    </span>
+                </div>
+              </div>
+              <div class="room-card-container6">
+                <span class="room-card-text4"><span>CAD$100</span></span>
+                <span class="room-card-text5"><span>Per Night</span></span>
+                <div class="solid-button-container">
+                  <button class="solid-button-button button">
+                    <span>Book Now</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- room card ends here -->
+<!-- footer -->
         <div class="discoverrooms-footer">
           <div class="discoverrooms-menu">
-            <a href="/" class="discoverrooms-navlink">
+            <a href="landing-page.html" class="discoverrooms-navlink">
               <h1 class="discoverrooms-logo">UrRoomSk</h1>
             </a>
             <div class="discoverrooms-links-container">
@@ -162,8 +246,8 @@
               </div>
               <div class="discoverrooms-container2">
                 <a
-                  href="https://example.com"
-                  target="_blank"
+                  href="aboutus.html"
+                  target="_self"
                   rel="noreferrer noopener"
                   class="discoverrooms-link3"
                 >
@@ -171,7 +255,7 @@
                 </a>
                 <a
                   href="https://example.com"
-                  target="_blank"
+                  target="_self"
                   rel="noreferrer noopener"
                   class="discoverrooms-link4"
                 >
@@ -244,7 +328,7 @@
         </div>
       </div>
     </div>
-    <script src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+    <script src="script.js"></script>
   </body>
   <!-- ends -->
 </html>
