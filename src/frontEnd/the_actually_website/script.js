@@ -186,4 +186,5 @@ function postRoom() {
   http.open('POST', post_url, true);
   http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   http.send(params);
+  console.log("params");
 }

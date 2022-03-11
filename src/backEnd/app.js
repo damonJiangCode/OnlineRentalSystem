@@ -5,6 +5,13 @@ const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
 
 app.use(bodyparser.json());
+app.use(express.static('../frontEnd/the_actually_website'));
+/*
+app.get('/',function(req,res) {
+    res.sendFile('../frontEnd/the_actually_website/landing-page.html');
+});
+ */
+
 
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
