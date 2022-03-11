@@ -1,16 +1,6 @@
-<<<<<<< HEAD
-// insert into table --  function
-function insert() {
-    var http = new XMLHttpRequest();
-    var insert_url = '/postRoom';
-    var params = 'name=' + document.getElementById('room_name').value +
-            '&desc=' + document.getElementById('room_desc').value + 
-            '&address=' + document.getElementsById('room_address').value +;
-    http.open('POST', insert_url, true);
-    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    http.send(params);
-}
-=======
+
+
+
 (function () {
   class Menu {
     init = () => {
@@ -173,4 +163,27 @@ function insert() {
 })()
 
 
->>>>>>> 11b75974f0951de69f86115c42d4434ceb66dd48
+// insert into table --  function
+function postRoom() {
+  var http = new XMLHttpRequest();
+  var post_url = '/postRoom';
+  var params = 'name=' + document.getElementById('room_name').value +
+          '&desc=' + document.getElementById('room_desc').value + 
+          '&address=' + document.getElementsById('room_address').value +
+          '&image=' + document.getElementById('myFile').value +
+          '&price=' + document.getElementsById('room_price').value +
+          '&pet=' + document.getElementById('pet').checked +
+          '&disableAccess=' + document.getElementById('Disable').checked +
+          '&wifi=' + document.getElementById('Wifi').checked +
+          '&pool=' + document.getElementById('Pool').checked +
+          '&spa=' + document.getElementById('Spa').checked +
+          '&parking=' + document.getElementById('Parking').checked +
+          '&gym=' + document.getElementById('Gym').checked +
+          '&ac=' + document.getElementById('AC').checked +
+          '&food=' + document.getElementById('Food').checked +
+          '&bar=' + document.getElementById('Bar').checked +
+          '&laundry=' + document.getElementById('Laundry').checked;
+  http.open('POST', post_url, true);
+  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  http.send(params);
+}
