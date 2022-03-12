@@ -74,16 +74,18 @@
               class="input"
             />
             <p><br></p>
-            <div class="dropdown">
-              <button class="dropbtn">Rate the Hotel</button>
-              <div class="dropdown-content">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-              </div>
-            </div>
+            
+            <!-- new dropdown menu -->
+            <label for="hotel-rating">Rate the Hotel/Room: </label>
+            <select name="hotel-rating" id="hotel-rating">
+                <option value="one-star">One-Star</option>
+                <option value="two-star">Two-Star</option>
+                <option value="three-star">Three-Star</option>
+                <option value="four-star">Four-Star</option>
+                <option value="five-star">Five-Star</option>
+            </select>
+            <!-- new dropdown menu ends here -->
+
             <p><br></p>
             <span class="post-room-page-text1">Description</span>
             <input
@@ -103,7 +105,7 @@
               class="input"
             />
             <p><br></p>
-            <span class="post-room-page-text1">Hotel Images</span>
+            <span class="post-room-page-text1">Images</span>
             <form action="/action_page.php">
               <input type="file" id="myFile" name="filename">
             <p><br></p>           
