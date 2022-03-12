@@ -64,10 +64,10 @@
         <h1 class="post-room-page-text">Post a room</h1>
 <!-- form for posting room -->
         <div class="post-room-page-container1">
-          <form class="post-room-page-form">
+          <form class="post-room-page-form" method="POST" action="/postRoom">
             <span class="post-room-page-text1">Room Name</span>
             <input
-              id="room_name"
+              name="room_name"
               type="text"
               placeholder="Enter the name of the Hotel / Room"
               autofocus="true"
@@ -87,7 +87,7 @@
             <p><br></p>
             <span class="post-room-page-text1">Description</span>
             <input
-              id="room_desc"
+              name="room_desc"
               type="text"
               placeholder="Enter the Description of the Hotel / Room"
               autofocus="true"
@@ -96,7 +96,7 @@
             <p><br></p>
             <span class="post-room-page-text1">Address</span>
             <input
-              id="room_address"
+              name="room_address"
               type="text"
               placeholder="Enter the Address of Hotel / Room"
               autofocus="true"
@@ -109,7 +109,7 @@
             <p><br></p>           
             <span class="post-room-page-text1">Price</span>
             <input
-              id="room_price"
+              name="room_price"
               type="text"
               placeholder="Enter the Price Hotel / Room"
               autofocus="true"
@@ -145,7 +145,7 @@
             <br>
             <br>     
             <button class="solid-button-button button">
-                <span onclick="postRoom()">Submit</span>
+                <span>Submit</span>
             </button>            
           </form>
         </div>
@@ -269,7 +269,7 @@
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script type="text/javascript"></script>
   </body>
   <!-- ends -->
 </html>
