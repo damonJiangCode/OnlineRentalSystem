@@ -4,6 +4,7 @@ var app = express();
 const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
 
+app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.use(express.static('../frontEnd/the_actually_website'));
 /*
@@ -29,32 +30,33 @@ mysqlConnection.connect((err) => {
 
 });
 
-
 app.post('/postRoom',function(req,res) {
-    var name = req.body.name;
-    var desc = req.body.desc;
-    var address = req.body.address;
-    var image = req.body.image;
-    var star = req.body.star;
-    var price = req.body.price;
+    console.log(req.body);
+    var name = req.body.room_name;
+    var desc = req.body.room_desc;
+    var address = req.body.room_address;
+    var image = req.body.filename;
+    // var star = req.body.star;
+
+    var price = req.body.room_price;
     var pet = req.body.pet;
-    var disabledAccess = req.body.disabledAccess;
-    var wifi = req.body.wifi;
-    var pool = req.body.pool;
-    var spa = req.body.spa;
-    var parking = req.body.parking;
-    var gym = req.body.gym;
-    var ac = req.body.ac;
-    var food = req.body.food;
-    var bar = req.body.bar;
-    var laundry = req.body.laundry;
+    var disabledAccess = req.body.Disable;
+    var wifi = req.body.Wifi;
+    var pool = req.body.Pool;
+    var spa = req.body.Spa;
+    var parking = req.body.Parking;
+    var gym = req.body.Gym;
+    var ac = req.body.AC;
+    var food = req.body.Food;
+    var bar = req.body.Bar;
+    var laundry = req.body.Laundry;
 
     var post = {
         name: name, 
         desc: desc, 
         address: address,
         image: image,
-        star: star,
+        // star: star,
         price:price,
         pet:pet, 
         disabledAccess:disabledAccess, 
@@ -70,12 +72,14 @@ app.post('/postRoom',function(req,res) {
     };
     console.log(post);
 
+    /*
     let sql = 'INSERT INTO roominfo SET ?';
     mysqlConnection.query(sql, post, (err, result) => {
         if(err) throw err;
         console.log(result);
         console.log('added');
     });
+    */
 
     res.send("all done");
 });
