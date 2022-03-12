@@ -36,8 +36,7 @@ app.post('/postRoom',function(req,res) {
     var desc = req.body.room_desc;
     var address = req.body.room_address;
     var image = req.body.filename;
-    // var star = req.body.star;
-
+    var star = req.body.star;
     var price = req.body.room_price;
     var pet = req.body.pet;
     var disabledAccess = req.body.Disable;
@@ -50,13 +49,14 @@ app.post('/postRoom',function(req,res) {
     var food = req.body.Food;
     var bar = req.body.Bar;
     var laundry = req.body.Laundry;
+    // console.log(laundry == null)
 
     var post = {
         name: name, 
         desc: desc, 
         address: address,
         image: image,
-        // star: star,
+        star: star,
         price:price,
         pet:pet, 
         disabledAccess:disabledAccess, 
