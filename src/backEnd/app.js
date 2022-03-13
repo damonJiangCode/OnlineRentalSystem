@@ -40,6 +40,33 @@ function parserInt(input) {
     }
 }
 
+app.post('/read', (req, res) => {
+    var sql = "SELECT * FROM roominfo";
+    var mode = req.body.mode;
+    if (mode=='ap'){sql = "SELECT * FROM posts ORDER BY price ASC"};
+    if (mode=='dp'){sql = "SELECT * FROM posts ORDER BY price DESC"};
+    if (mode=='ar'){sql = "SELECT * FROM posts ORDER BY star ASC"};
+    if (mode=='dr'){sql = "SELECT * FROM posts ORDER BY star DESC"};
+
+    var message = '';
+    
+    con.query(sql, function (err, result){
+            if (err) throw err;
+            
+            Object.keys(result).forEach(function(key) {
+                var row = result[key];
+                console.log(row);
+                //message = message + "Topic: "+row.topic+";\nComment: "+row.data+";\nTime: "+row.timestamp+".\n";
+            });
+    
+            res.send(message); 
+     
+    });
+                    
+    
+});
+
+
 app.post('/postRoom',function(req,res) {
     console.log(req.body);
     var name = req.body.room_name;

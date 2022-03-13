@@ -69,22 +69,22 @@
         
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Price: high-low</span></button>
+                <button onclick="descendPrice()" class="outline-button-button button"><span>Price: high-low</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Price: low-high</span></button>
+                <button onclick="ascendPrice()" class="outline-button-button button"><span>Price: low-high</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Rating: high-low</span></button>
+                <button onclick="descendRate()" class="outline-button-button button"><span>Rating: high-low</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Rating: low-high</span></button>
+                <button onclick="ascendRate()" class="outline-button-button button"><span>Rating: low-high</span></button>
                 </div>
             </div>
         </ul>
@@ -329,6 +329,81 @@
       </div>
     </div>
     <script src="script.js"></script>
+    <script type="text/javascript">
+
+      var sortingMode = 'default';
+      
+      function ascendPrice(){
+          sortingMode = 'ap';
+          readmessage();
+      }
+      
+      function descendPrice(){
+          sortingMode = 'dp';
+          readmessage();
+      }
+      
+      function ascendRate(){
+          sortingMode = 'ar';
+          readmessage();
+      }
+      
+      function descendRate(){
+          sortingMode = 'dR';
+          readmessage();
+      }
+      
+      
+      function readmessage(){
+          var param = 'mode='+sortingMode;
+          
+          var xhr = new XMLHttpRequest();
+          var url2 = '/read';
+          xhr.onreadystatechange = function()
+          {
+              if(xhr.readyState == 4 && xhr.status == 200) 
+              {
+                  document.getElementById('answer').innerHTML = xhr.responseText;
+              } 
+          }
+      
+          xhr.open('post',url2, true);
+          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xhr.send(param);
+      }
+      /*
+      function postmessage(){
+          var xhr = new XMLHttpRequest();
+          var url1 = '/save';
+          
+          var params = 'topic=' + document.getElementById("topicIn").value+'&&comment=' + document.getElementById("commentIn").value;
+      
+          xhr.onreadystatechange = function()
+          {
+              
+              if(xhr.readyState == 4 && xhr.status == 200) 
+              {
+                  //setInterval(readmessage,500);
+                  window.alert(xhr.responseText);
+      
+                  //readmessage();
+              }  
+              
+          };
+      
+          xhr.open('post', url1, true);
+          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xhr.send(params);
+      };
+      */
+      
+      setInterval(readmessage,500);
+      
+      
+      
+      
+      
+      </script>
   </body>
   <!-- ends -->
 </html>
