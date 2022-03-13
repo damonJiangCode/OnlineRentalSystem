@@ -128,48 +128,14 @@
         </ul>
 <!-- filters end -->
 
-<!-- room card -->
-        <div class="room-card-container room-card-root-class-name1">
-          <div class="room-card-container1">
-            <img
-              alt="image"
-              src="./public/playground_assets/default-img.svg"
-              class="room-card-image"
-            />
-            <div class="room-card-container2">
-              <h1 class="room-card-text"><span>RoomName</span></h1>
-              <div class="room-card-container3">
-                <div class="room-card-container4">
-                  <div class="room-card-container5">
-                    <span class="room-card-text1"><span>1 bedroom</span></span>
-                  </div>
-                  <span class="room-card-text2"><span>1 bathroom</span></span>
-                </div>
-                <span class="room-card-text3">
-                  <span>NOT / Pets friendly</span>
-                </span>
-                <span class="room-card-text3">
-                    <span>Owner's info: </span>
-                  </span>
-                  <span class="room-card-text3">
-                    <span>Phone number: +1 (XXX)XXX-XXXX</span>
-                  </span>
-              </div>
-            </div>
-            <div class="room-card-container6">
-              <span class="room-card-text4"><span>CAD$100</span></span>
-              <span class="room-card-text5"><span>Per Night</span></span>
-              <div class="solid-button-container">
-                <button class="solid-button-button button">
-                  <span>Book Now</span>
-                </button>
-              </div>
-            </div>
+<!-- room cards container start-->
+        <div id="card-container-cover">
+          <div id="card-container">
+
           </div>
-        </div>
-        <!-- room card ends here -->
-<!-- room card -->
-        <div class="room-card-container room-card-root-class-name1">
+          <!-- room card -->
+          <!----
+          <div class="room-card-container room-card-root-class-name1">
             <div class="room-card-container1">
               <img
                 alt="image"
@@ -207,7 +173,13 @@
               </div>
             </div>
           </div>
-          <!-- room card ends here -->
+        -->
+        </div>
+      
+        <!-- room card ends here -->
+
+<!-- room cards container end-->
+
 <!-- footer -->
         <div class="discoverrooms-footer">
           <div class="discoverrooms-menu">
@@ -330,7 +302,7 @@
     </div>
     <script src="script.js"></script>
     <script type="text/javascript">
-
+      
       var sortingMode = 'default';
       
       function ascendPrice(){
@@ -355,6 +327,11 @@
       
       
       function readmessage(){
+          container = document.getElementById('card-container');
+          while (container.firstChild) {
+              container.firstChild.remove()
+          }
+          //container.parentNode.removeChild(container);
           var param = 'mode='+sortingMode;
           
           var xhr = new XMLHttpRequest();
@@ -363,9 +340,63 @@
           {
               if(xhr.readyState == 4 && xhr.status == 200) 
               {
-                  document.getElementById('answer').innerHTML = xhr.responseText;
-              } 
-          }
+                
+                const apiResult = JSON.parse(xhr.response);
+                console.log(apiResult.constructor == Array);
+                console.log(apiResult);
+              
+                apiResult.forEach((result, idx) => {
+                  // Create card element
+                  //const card = document.createElement('div');
+                  //card.classList = 'card-body';
+
+                  // Construct card content
+                  const content = `
+                  <div class="room-card-container1">
+                    <img
+                      alt="image"
+                      src="./public/playground_assets/default-img.svg"
+                      class="room-card-image"
+                    />
+                    <div class="room-card-container2">
+                      <h1 class="room-card-text"><span>${result.name}</span></h1>
+                      <div class="room-card-container3">
+                        <div class="room-card-container4">
+                          <div class="room-card-container5">
+                            <span class="room-card-text1"><span>1 bedroom</span></span>
+                          </div>
+                          <span class="room-card-text2"><span>1 bathroom</span></span>
+                        </div>
+                        <span class="room-card-text3">
+                          <span>NOT / Pets friendly</span>
+                        </span>
+                        <span class="room-card-text3">
+                            <span>Owner's info: </span>
+                          </span>
+                          <span class="room-card-text3">
+                            <span>Phone number: +1 (XXX)XXX-XXXX</span>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="room-card-container6">
+                      <span class="room-card-text4"><span>$${result.price} CAD</span></span>
+                      <span class="room-card-text5"><span>Per Night</span></span>
+                      <div class="solid-button-container">
+                        <button class="solid-button-button button">
+                          <span>Book Now</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  `
+              
+
+                  // Append newyly created card element to the container
+                  container.innerHTML += content;
+                  });
+
+                } 
+            }
       
           xhr.open('post',url2, true);
           xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -397,7 +428,8 @@
       };
       */
       
-      setInterval(readmessage,500);
+      readmessage()
+      //setInterval(readmessage,500);
       
       
       
