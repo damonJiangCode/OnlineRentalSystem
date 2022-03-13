@@ -30,6 +30,16 @@ mysqlConnection.connect((err) => {
 
 });
 
+// parse function
+function parserInt(input) {
+    if (input == null) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+
 app.post('/postRoom',function(req,res) {
     console.log(req.body);
     var name = req.body.room_name;
@@ -38,18 +48,19 @@ app.post('/postRoom',function(req,res) {
     var image = req.body.filename;
     var star = req.body.star;
     var price = req.body.room_price;
-    var pet = req.body.pet;
-    var disabledAccess = req.body.Disable;
-    var wifi = req.body.Wifi;
-    var pool = req.body.Pool;
-    var spa = req.body.Spa;
-    var parking = req.body.Parking;
-    var gym = req.body.Gym;
-    var ac = req.body.AC;
-    var food = req.body.Food;
-    var bar = req.body.Bar;
-    var laundry = req.body.Laundry;
-    // console.log(laundry == null)
+    
+    var pet = parserInt(req.body.pet);
+    var disabledAccess = parserInt(req.body.Disable);
+    var wifi = parserInt(req.body.Wifi);
+    var pool = parserInt(req.body.Pool);
+    var spa = parserInt(req.body.Spa);
+    var parking = parserInt(req.body.Parking);
+    var gym = parserInt(req.body.Gym);
+    var ac = parserInt(req.body.AC);
+    var food = parserInt(req.body.Food);
+    var bar = parserInt(req.body.Bar);
+    var laundry = parserInt(req.body.Laundry);
+
 
     var post = {
         name: name, 
@@ -72,14 +83,14 @@ app.post('/postRoom',function(req,res) {
     };
     console.log(post);
 
-    /*
+    
     let sql = 'INSERT INTO roominfo SET ?';
     mysqlConnection.query(sql, post, (err, result) => {
         if(err) throw err;
         console.log(result);
         console.log('added');
     });
-    */
+    
 
     res.send("all done");
 });
