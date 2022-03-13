@@ -43,27 +43,25 @@ function parserInt(input) {
 app.post('/read', (req, res) => {
     var sql = "SELECT * FROM roominfo";
     var mode = req.body.mode;
-    if (mode=='ap'){sql = "SELECT * FROM posts ORDER BY price ASC"};
-    if (mode=='dp'){sql = "SELECT * FROM posts ORDER BY price DESC"};
-    if (mode=='ar'){sql = "SELECT * FROM posts ORDER BY star ASC"};
-    if (mode=='dr'){sql = "SELECT * FROM posts ORDER BY star DESC"};
+    if (mode=='ap'){sql = "SELECT * FROM roominfo ORDER BY price ASC"};
+    if (mode=='dp'){sql = "SELECT * FROM roominfo ORDER BY price DESC"};
+    if (mode=='ar'){sql = "SELECT * FROM roominfo ORDER BY star ASC"};
+    if (mode=='dr'){sql = "SELECT * FROM roominfo ORDER BY star DESC"};
 
     var message = '';
     
-    con.query(sql, function (err, result){
+    mysqlConnection.query(sql, function (err, result){
             if (err) throw err;
-            
+            console.log(result);
+            res.send(result);
+            /*
             Object.keys(result).forEach(function(key) {
                 var row = result[key];
                 console.log(row);
                 //message = message + "Topic: "+row.topic+";\nComment: "+row.data+";\nTime: "+row.timestamp+".\n";
-            });
-    
-            res.send(message); 
-     
-    });
-                    
-    
+            }); 
+            */
+    });                   
 });
 
 
