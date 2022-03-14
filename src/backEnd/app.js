@@ -64,7 +64,7 @@ app.post('/read', (req, res) => {
     });                   
 });
 
-
+// Add a room
 app.post('/postRoom',function(req,res) {
     console.log(req.body);
     var name = req.body.room_name;
@@ -121,6 +121,7 @@ app.post('/postRoom',function(req,res) {
 });
 
 
+// Delete rooms
 app.post('/delRoom', function(req,res){
     var name = req.body.name;
     let sql = 'DELETE FROM roominfo WHERE name=?';
@@ -136,6 +137,7 @@ app.post('/delRoom', function(req,res){
     res.send("all done");
 })
 
+// Get all rooms
 app.get('/getRooms',function(req,res){
     let sql = 'SELECT * FROM roominfo';
     mysqlConnection.query(sql, (err, result) => {
