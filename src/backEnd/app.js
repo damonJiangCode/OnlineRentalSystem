@@ -64,15 +64,35 @@ app.post('/read', (req, res) => {
     });                   
 });
 
+// a function to test whether the input is valid
+function validInput(input) {
+    if (input == null) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+
 // Add a room
 app.post('/postRoom',function(req,res) {
     console.log(req.body);
     var name = req.body.room_name;
+    nameIsValid = validInput(name)
     var desc = req.body.room_desc;
+    descIsValid = validInput(desc)
     var address = req.body.room_address;
+    adressIsValid = validInput(address)
     var image = req.body.filename;
+    imageIsValid = validInput(image)
     var star = req.body.star;
+    starIsValid = validInput(star)
     var price = req.body.room_price;
+    priceIsValid = validInput(price)
+
+    if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0) {
+        console.log("Inputs should be valid!\n")
+    }
     
     var pet = parserInt(req.body.pet);
     var disabledAccess = parserInt(req.body.Disable);
