@@ -9,6 +9,7 @@
       return this;
     };
 
+    // portion of code for resizing
     getMenuElementsAndAddEventsByDataAttrs = () => {
       const allHeaders = teleport.getAllElementsByDataAttribute('role', 'Header')
 
