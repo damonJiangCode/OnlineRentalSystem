@@ -1,3 +1,4 @@
+// load packages
 const mysql = require('mysql');
 const express = require('express');
 var app = express();
@@ -6,31 +7,30 @@ const { disabled } = require('express/lib/application');
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
+
+// load pages
 app.use(express.static('../frontEnd/the_actually_website'));
-/*
-app.get('/',function(req,res) {
-    res.sendFile('../frontEnd/the_actually_website/landing-page.html');
-});
- */
 
 
+// create the info of the connection 
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'Assassin990118',
     database: 'cmpt370'
 });
 
 
+// connect DB
 mysqlConnection.connect((err) => {
     if(!err)
         console.log('DB connection successful');
     else
         console.log('DB connection failed \n Error: '+ JSON.stringify(err,undefined,2));
-
 });
 
-// parse function
+
+// a function to check whether input (checkbox) is checked
 function parserInt(input) {
     if (input == null) {
         return 0;
@@ -40,29 +40,6 @@ function parserInt(input) {
     }
 }
 
-app.post('/read', (req, res) => {
-    var sql = "SELECT * FROM roominfo";
-    var mode = req.body.mode;
-    if (mode=='ap'){sql = "SELECT * FROM roominfo ORDER BY price ASC"};
-    if (mode=='dp'){sql = "SELECT * FROM roominfo ORDER BY price DESC"};
-    if (mode=='ar'){sql = "SELECT * FROM roominfo ORDER BY star ASC"};
-    if (mode=='dr'){sql = "SELECT * FROM roominfo ORDER BY star DESC"};
-
-    var message = '';
-    
-    mysqlConnection.query(sql, function (err, result){
-            if (err) throw err;
-            console.log(result);
-            res.send(result);
-            /*
-            Object.keys(result).forEach(function(key) {
-                var row = result[key];
-                console.log(row);
-                //message = message + "Topic: "+row.topic+";\nComment: "+row.data+";\nTime: "+row.timestamp+".\n";
-            }); 
-            */
-    });                   
-});
 
 // a function to test whether the input is valid
 function validInput(input) {
@@ -73,6 +50,7 @@ function validInput(input) {
         return 1;
     }
 }
+
 
 // Add a room
 app.post('/postRoom',function(req,res) {
@@ -90,6 +68,7 @@ app.post('/postRoom',function(req,res) {
     var price = req.body.room_price;
     priceIsValid = validInput(price)
 
+    // check whether the inputs are valid
     if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0) {
         console.log("Inputs should be valid!\n")
     }
@@ -105,7 +84,6 @@ app.post('/postRoom',function(req,res) {
     var food = parserInt(req.body.Food);
     var bar = parserInt(req.body.Bar);
     var laundry = parserInt(req.body.Laundry);
-
 
     var post = {
         name: name, 
@@ -126,18 +104,38 @@ app.post('/postRoom',function(req,res) {
         bar:bar, 
         laundry:laundry
     };
-    console.log(post);
+    // console.log(post);
 
-    
+    // insert the information from frontend to DB
+    var response = new Object();
     let sql = 'INSERT INTO roominfo SET ?';
     mysqlConnection.query(sql, post, (err, result) => {
         if(err) throw err;
-        console.log(result);
-        console.log('added');
+        // console.log(result);
+        else {
+            console.log('added!');
+        }
+        res.send("all done!");
     });
-    
+});
 
-    res.send("all done");
+
+// sort the posting rooms by the given order
+app.post('/read', (req, res) => {
+    var sql = "SELECT * FROM roominfo";
+    var mode = req.body.mode;
+    if (mode=='ap'){sql = "SELECT * FROM roominfo ORDER BY price ASC"}; // sort by ascending price order
+    if (mode=='dp'){sql = "SELECT * FROM roominfo ORDER BY price DESC"};// sort by descending price order
+    if (mode=='ar'){sql = "SELECT * FROM roominfo ORDER BY star ASC"};  // sort by ascending star order
+    if (mode=='dr'){sql = "SELECT * FROM roominfo ORDER BY star DESC"}; // sort by descending star order
+
+    mysqlConnection.query(sql, function (err, result){
+            if (err) throw err;
+            else {
+                console.log(result);
+                res.send(result);
+            }
+    });                   
 });
 
 
@@ -156,6 +154,7 @@ app.post('/delRoom', function(req,res){
 
     res.send("all done");
 })
+
 
 // Get all rooms
 app.get('/getRooms',function(req,res){
