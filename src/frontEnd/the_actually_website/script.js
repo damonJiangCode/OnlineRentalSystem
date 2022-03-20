@@ -163,7 +163,7 @@
   new Accordion().init()
 })()
 
-
+/*
 // insert into table --  function
 function postRoom() {
   var http = new XMLHttpRequest();
@@ -177,7 +177,7 @@ function postRoom() {
           '&disableAccess=' + document.getElementById('Disable').checked +
           '&wifi=' + document.getElementById('Wifi').checked +
           '&pool=' + document.getElementById('Pool').checked +
-          '&spa=' + document.getElementById('Spa').checked +
+          '&spa=' + documsent.getElementById('Spa').checked +
           '&parking=' + document.getElementById('Parking').checked +
           '&gym=' + document.getElementById('Gym').checked +
           '&ac=' + document.getElementById('AC').checked +
@@ -189,3 +189,22 @@ function postRoom() {
   http.send(params);
   console.log("params");
 }
+
+function update() {
+  var http = new XMLHttpRequest();
+  var url = '/postRoom';
+  http.open('POST', url, true);
+  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  http.onreadystatechange = function() { 
+    if(http.readyState == 4 && http.status == 200) {
+      var response = JSON.parse(http.responseText);
+      if (response.isFinished == 1) {
+        alert('Saving info succeeded!\n');
+      }
+      else {
+        alert('Saving info failed!\n');
+      }  
+    }
+  }
+}
+*/
