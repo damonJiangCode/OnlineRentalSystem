@@ -22,6 +22,13 @@
     flex: 0 0 33.333333%;
     text-align: center;
 }
+.item2{
+    background: brown;
+    padding: 0.5em;
+    border-radius: 12px;
+    flex: 0 0 33.333333%;
+    text-align: center;
+}
 li:hover{
     background:gray;
 }
