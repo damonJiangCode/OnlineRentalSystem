@@ -10,4 +10,21 @@
     align-items: stretch;
     align-content: flex-start;
     gap: 10px 10px;
+    list-style: none;
+    color: white;
+    margin: 1em;
+    border-radius: 25px;
+}
+.item{
+    background: black;
+    padding: 0.5em;
+    border-radius: 12px;
+    flex: 0 0 33.333333%;
+    text-align: center;
+}
+li:hover{
+    background:gray;
+}
+.someroom{
+    margin-top: 3em;
 }
