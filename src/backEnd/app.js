@@ -4,6 +4,11 @@ const express = require('express');
 var app = express();
 const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
+const cors = require("cors");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+app.use(express.json());
+app.use(cors());
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
@@ -174,6 +179,55 @@ app.get('/getRooms',function(req,res){
         res.send(result);
     });
 })
+
+// create manager account
+app.post('/create_account',(req, res) => {
+
+    var manager_name = req.body.manager_name;
+    var manager_email = req.body.manager_email;
+    var manager_phone = req.body.manager_phone;
+    const manager_password = req.body.manager_password;
+
+    bcrypt.hash(manager_password,saltRounds, (err, hash) => {
+
+        if(err){
+            console.log(err);
+        }
+
+        mysqlConnection.query("INSERT INTO managerinfo (manager_name, manager_email, manager_phone, manager_password ) VALUES (?,?,?,?)",
+            [manager_name,manager_email,manager_phone, hash],(err, result) => {
+            console.log(result);
+        });
+    })
+});
+
+// manager login
+app.post('/login',(req, res) =>{
+
+    const manager_name = req.body.manager_name;
+    const manager_password = req.body.manager_password;
+
+    mysqlConnection.query("SELECT * FROM managerinfo WHERE manager_name = ?",manager_name,(err, result) => {
+        if(err){
+            res.send({err: err});
+        }
+
+        if (result.length > 0){
+            bcrypt.compare(manager_password, result[0].manager_password, (error , response) => {
+                if (response){
+                    res.send(result)
+                } else {
+                    res.send({ message: "Wrong username/Password combination! Try again!"});
+                }
+            })
+        } else {
+            res.send({message: "User not found!"});
+        }
+
+    });
+});
+
+
 
 
 var port = 3000;
