@@ -21,6 +21,7 @@
     border-radius: 12px;
     flex: 0 0 33.333333%;
     text-align: center;
+    color: white;
 }
 .item2{
     background: brown;
@@ -29,9 +30,16 @@
     flex: 0 0 33.333333%;
     text-align: center;
 }
-li:hover{
-    background:gray;
+button:hover{
+    background:red;
+}
+item:hover{
+    color: white;
 }
 .someroom{
     margin-top: 3em;
+}
+.red{
+    color: red;
+    background: none;
 }
