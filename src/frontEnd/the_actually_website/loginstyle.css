@@ -1,9 +1,9 @@
 body{
-    margin: 0;
     padding:0;
+    margin: 0;
     font-family: montserrat;
-    background: linear-gradient(#2980b9,white);
     height: 100vh;
+    background: linear-gradient(#2980b9,white);
     overflow:hidden;  
 }
 .centre{  
