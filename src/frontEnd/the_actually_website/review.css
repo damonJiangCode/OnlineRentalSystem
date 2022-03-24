@@ -1,0 +1,50 @@
+.heading{
+    text-align: center;
+    font-size: 16px;
+}
+.head2{
+    text-align: center;
+    font-size: 16px;
+}
+.someroom{
+    margin-top: 3em;
+}
+.someroom2{
+    margin-top: 1em;
+}
+.btn{
+    background: black;
+    padding: 0.75em;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+}
+.btn2{
+    background: brown;
+    padding: 0.75em;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+}
+.btn3{
+    background: green;
+    padding: 0.75em;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+}
+button:hover{
+    background: gray;
+    cursor: pointer;
+}
+.center{
+    display: block;
+    text-align: center;
+}
+form{
+    width: 50%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
