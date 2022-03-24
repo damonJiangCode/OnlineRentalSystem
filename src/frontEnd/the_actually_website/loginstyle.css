@@ -1,0 +1,105 @@
+body{
+    margin: 0;
+    padding:0;
+    font-family: montserrat;
+    background: linear-gradient(#2980b9,white);
+    height: 100vh;
+    overflow:hidden;  
+}
+.centre{  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 450px;
+    background: white;
+    border-radius: 15px;
+}
+.centre h1{
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid silver;
+    text-align: center;    
+}
+
+.centre form {
+    box-sizing: border-box;
+    padding: 0 30px;
+
+    
+}
+form .texta{
+    position: relative;
+    margin: 35px 0;
+    border-bottom: 2px solid rgb(66, 66, 66);
+    
+
+}
+.texta input{    
+    width: 100%;
+    padding: 0 5px;
+    height: 30px;
+    font-size: 16px;
+    border: none; 
+    outline: none;  
+}
+.texta label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #999797;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+.texta span::before{
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #2691d9;
+    transition: .5s;
+}
+.texta input:focus ~ label,
+.texta input:valid ~label{
+    top: -5px;
+    color: #2691d9;
+}
+.texta input:focus~span::before,
+.texta input:valid~span::before{
+    width: 100%;
+}
+a:link{
+    text-decoration: none;
+    color: #2691d9;
+}
+a:hover {
+    color: black;
+  }
+.signup{
+    margin: -5px 0 22px 5px;
+    cursor: pointer;
+}
+
+input[type ="submit"]{
+    width:100%;
+    height: 50px;
+    border: 1px solid;
+    background: #2386c9;
+    border-radius: 26px;
+    font-size: 19px;
+    color: #e9f4fb;
+}
+.signup{
+    margin: 22px 0;
+}
+.lostpassword{
+    margin: 22px 0;
+
+}
+.return{
+    margin: 22px 0;
+    text-align: center
+}
+
