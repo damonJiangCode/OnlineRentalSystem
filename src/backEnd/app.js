@@ -21,7 +21,7 @@ app.use(express.static('../frontEnd/the_actually_website'));
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Assassin990118',
+    password: 'root',
     database: 'cmpt370'
 });
 
@@ -125,7 +125,7 @@ app.post('/postRoom',function(req,res) {
 });
 
 
-// sort the posting rooms by the given order
+// sort and filter the posting rooms by the given order
 app.post('/read', (req, res) => {
     var sql = "SELECT * FROM roominfo";
     var mode = req.body.mode;
@@ -133,6 +133,16 @@ app.post('/read', (req, res) => {
     if (mode=='dp'){sql = "SELECT * FROM roominfo ORDER BY price DESC"};// sort by descending price order
     if (mode=='ar'){sql = "SELECT * FROM roominfo ORDER BY star ASC"};  // sort by ascending star order
     if (mode=='dr'){sql = "SELECT * FROM roominfo ORDER BY star DESC"}; // sort by descending star order
+
+    //filtering
+    if (mode=='pf'){sql = "SELECT * FROM cmpt370.roominfo WHERE pet = 1"};
+    if (mode=='npf'){sql = "SELECT * FROM cmpt370.roominfo WHERE pet = 0"};
+    if (mode=='5s'){sql = "SELECT * FROM cmpt370.roominfo WHERE star = 5"};
+    if (mode=='4s'){sql = "SELECT * FROM cmpt370.roominfo WHERE star = 4"};
+    if (mode=='3s'){sql = "SELECT * FROM cmpt370.roominfo WHERE star = 3"};
+    if (mode=='2s'){sql = "SELECT * FROM cmpt370.roominfo WHERE star = 2"};
+    if (mode=='1s'){sql = "SELECT * FROM cmpt370.roominfo WHERE star = 1"};
+
 
     mysqlConnection.query(sql, function (err, result){
             if (err) throw err;
@@ -181,7 +191,7 @@ app.get('/getRooms',function(req,res){
 })
 
 // create manager account
-app.post('/create_account',(req, res) => {
+app.post('/createAccount',(req, res) => {
 
     var manager_name = req.body.manager_name;
     var manager_email = req.body.manager_email;

@@ -92,37 +92,37 @@
             <span>Filter by:</span>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Pet friendly</span></button>
+                <button onclick="petFriendly()" class="outline-button-button button"><span>Pet friendly</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>NOT pet friendly</span></button>
+                <button onclick="notPetFriendly()" class="outline-button-button button"><span>NOT pet friendly</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Rating: 5 stars</span></button>
+                <button onclick="fiveStar()" class="outline-button-button button"><span>Rating: 5 stars</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Rating: 4 stars</span></button>
+                <button onclick="fourStar()" class="outline-button-button button"><span>Rating: 4 stars</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Rating: 3 stars</span></button>
+                <button onclick="threeStar()" class="outline-button-button button"><span>Rating: 3 stars</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Rating: 2 stars</span></button>
+                <button onclick="twoStar()" class="outline-button-button button"><span>Rating: 2 stars</span></button>
                 </div>
             </div>
             <div>
                 <div class="outline-button-container">
-                <button class="outline-button-button button"><span>Rating: 1 stars</span></button>
+                <button onclick="oneStar()" class="outline-button-button button"><span>Rating: 1 stars</span></button>
                 </div>
             </div>
         </ul>
@@ -321,9 +321,43 @@
       }
       
       function descendRate(){
-          sortingMode = 'dR';
+          sortingMode = 'dr';
           readmessage();
       }
+
+      function petFriendly(){
+          sortingMode = 'pf';
+          readmessage();
+      }
+
+      function notPetFriendly(){
+          sortingMode = 'npf';
+          readmessage();
+      }
+
+      function fiveStar(){
+          sortingMode = '5s';
+          readmessage();
+      }
+
+      function fourStar(){
+          sortingMode = '4s';
+          readmessage();
+      }
+      function threeStar(){
+          sortingMode = '3s';
+          readmessage();
+      }
+      function twoStar(){
+          sortingMode = '2s';
+          readmessage();
+      }
+      function oneStar(){
+          sortingMode = '1s';
+          readmessage();
+      }
+
+
       
       
       function readmessage(){
