@@ -270,6 +270,31 @@ app.get('/getComments',function(req,res){
     });
 })
 
+// add customers
+app.post('/addCustomer',(req,res) =>{
+    var customer_name = req.body.customer_name;
+    var customer_email = req.body.customer_email;
+    var customer_phone = req.body.customer_phone;
+    var vegetarian = req.body.vegetarian;
+    var vegan = req.body.vegan;
+    var gluten = req.body.gluten;
+    var deaf = req.body.deaf;
+    var blind = req.body.blind;
+    var wheelchair = req.body.wheelchair;
+
+    var post = {customer_name: customer_name, customer_email: customer_email, customer_phone: customer_phone,
+        vegetarian: vegetarian, vegan: vegan, gluten: gluten, deaf: deaf, blind: blind, wheelchair: wheelchair};
+    console.log(post);
+
+
+    mysqlConnection.query('INSERT INTO customerinfo (customer_name,customer_email,customer_phone,vegetarian,vegan,gluten,deaf,blind,wheelchair) VALUES (?,?,?,?,?,?,?,?,?)',
+        [customer_name,customer_email,customer_phone,vegetarian,vegan,gluten,deaf,blind,wheelchair], (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        console.log('added');
+    });
+    res.send("all done");
+});
 
 
 
