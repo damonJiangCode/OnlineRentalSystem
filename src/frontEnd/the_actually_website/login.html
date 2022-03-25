@@ -38,11 +38,11 @@
             <h1 style="padding-top: 1em;">Manager Login</h1>
             <form method="post">
                 <div class ="texta">
-                    <input type ="text" required>
+                    <input type ="text" required id = "manager_name">
                     <label>Username</label>
                 </div>
                 <div class ="texta">
-                    <input type ="text" required>
+                    <input type ="text" required id = "manager_password">
                     <label>Password</label>
                 </div>
                 <input type="submit" value="Login">
@@ -52,6 +52,40 @@
                 
             </form>
         </div>
+        <script type="text/javascript">
+
+            function login(){
+                var http = new XMLHttpRequest();
+                var url = '/login';
+                var manager_name = document.getElementById("manager_name").value;
+                var manager_password = document.getElementById("manager_password").value;
+
+                console.log('login function called');
+
+
+                http.open('POST', url);
+                http.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+                http.send(JSON.stringify({ manager_name: manager_name, manager_password: manager_password }));
+
+                http.onreadystatechange = function()
+                {
+                    if(http.readyState == 4 && http.status == 200)
+                    {
+                        var response = http.responseText;
+                        if(response == 'logged in'){
+                            //alert(staffName + " Registered");
+                        }
+                        else
+                            alert(response.data.message)
+                    }
+                };
+            }
+
+
+
+
+
+        </script>
     </body>
   
 </html>

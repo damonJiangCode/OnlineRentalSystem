@@ -226,8 +226,10 @@ app.post('/login',(req, res) =>{
         if (result.length > 0){
             bcrypt.compare(manager_password, result[0].manager_password, (error , response) => {
                 if (response){
-                    res.send(result)
+                    res.send("logged in")
+                    //res.send(result)
                 } else {
+                    //res.send("failed")
                     res.send({ message: "Wrong username/Password combination! Try again!"});
                 }
             })
@@ -237,6 +239,41 @@ app.post('/login',(req, res) =>{
 
     });
 });
+
+// add comments and rating
+app.post('/addComment',(req,res) =>{
+    var room_id = req.body.room_id;
+    var comment = req.body.comment;
+    var rating = req.body.rating;
+    var post = {room_id: room_id, comment: comment, rating: rating};
+    console.log(post);
+
+
+    mysqlConnection.query('INSERT INTO comments (room_id,comment,rating) VALUES (?,?,?)',[room_id,comment,rating], (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        console.log('added');
+    });
+    res.send("all done");
+});
+
+
+// Get comments and ratings for a room
+app.get('/getComments',function(req,res){
+    var room_id = req.body.room_id;
+
+
+    mysqlConnection.query('SELECT * FROM comments WHERE room_id = ?',room_id, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send(result);
+    });
+})
+
+
+
+
+
 
 
 
