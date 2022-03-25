@@ -120,7 +120,7 @@ app.post('/postRoom',function(req,res) {
         else {
             console.log('added!');
         }
-        res.send("all done!");
+        res.send(true);
     });
 });
 
@@ -209,6 +209,7 @@ app.post('/createAccount',(req, res) => {
             console.log(result);
         });
     })
+    res.send(true);
 });
 
 // manager login
