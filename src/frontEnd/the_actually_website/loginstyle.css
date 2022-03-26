@@ -30,14 +30,14 @@ body{
 form .texta{
     position: relative;
     margin: 35px 0;
-    border-bottom: 2px solid #D9280B;
+    border: 2px solid black;
     
 
 }
 .texta input{    
     width: 100%;
     padding: 0 5px;
-    height: 30px;
+    height: 40px;
     font-size: 16px;
     border: none; 
     outline: none;  
@@ -63,7 +63,7 @@ form .texta{
 }
 .texta input:focus ~ label,
 .texta input:valid ~label{
-    top: -5px;
+    top: -10px;
     color: #2691d9;
 }
 .texta input:focus~span::before,
