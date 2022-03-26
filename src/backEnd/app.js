@@ -35,7 +35,7 @@ mysqlConnection.connect((err) => {
 });
 
 // var for which room is selected
-var selectedRoom;
+var selectedRoom = 0;
 
 // a function to check whether input (checkbox) is checked
 function parserInt(input) {
@@ -243,29 +243,33 @@ app.post('/login',(req, res) =>{
 });
 
 // add comments and rating
-app.post('/addComment',(req,res) =>{
-    var room_id = req.body.room_id;
-    var comment = req.body.comment;
-    var rating = req.body.rating;
-    var post = {room_id: room_id, comment: comment, rating: rating};
-    console.log(post);
+app.post('/postComment',(req,res) =>{
+    var room_id = selectedRoom;
+    if (room_id == 0){
+        res.send("no room")
+    } else {
+        var comment = req.body.comment;
+        var rate = req.body.rate;
+        var post = {room_id: room_id, comment: comment, rate: rate};
+        console.log(post);
 
 
-    mysqlConnection.query('INSERT INTO comments (room_id,comment,rating) VALUES (?,?,?)',[room_id,comment,rating], (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        console.log('added');
-    });
-    res.send("all done");
+        mysqlConnection.query('INSERT INTO comments (room_id,comment,rating) VALUES (?,?,?)',[room_id,comment,rate], (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            console.log('added');
+        });
+        res.send("all done");
+    }  
 });
 
 
 // Get comments and ratings for a room
 app.get('/getComments',function(req,res){
-    var room_id = req.body.room_id;
+    var room_id = selectedRoom;
 
 
-    mysqlConnection.query('SELECT * FROM comments WHERE room_id = ?',room_id, (err, result) => {
+    mysqlConnection.query('SELECT * FROM comments WHERE room_id=?',room_id, (err, result) => {
         if(err) throw err;
         console.log(result);
         res.send(result);
@@ -302,7 +306,7 @@ app.post('/addCustomer',(req,res) =>{
 app.post('/selectRoom', (req, res) => {
     //console.log(req.body);
     selectedRoom = req.body.selectedRoom;
-    res.send("room "+selectedRoom+" is selected!")
+    res.send("room "+selectedRoom+" is selected!");
 });
 
 

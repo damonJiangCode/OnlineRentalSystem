@@ -70,6 +70,7 @@
                 <div class="center">
                     <form action="">
                         <input
+                        id="customerIn"
                         name="customer_comment"
                         type="text"
                         placeholder="---Type Review Here---"
@@ -79,13 +80,13 @@
                     </form>
                 </div>
                 <p><br></p>
-                <button class="btn3">Submit</button>
+                <button class="btn3" onclick="submitRating()">Submit</button>
                 <button class="btn2" onclick="hideDiv()">Cancel</button>
             </div>
             <!-- above section of code will be hidden before btn is clicked -->
         </div>
         <p><br></p>
-        <div class="comment-container">
+        <div id="comment-container">
 
         </div>
         <!-- reviews from users
@@ -115,16 +116,34 @@
             function hideDiv(){
                 document.getElementById('wReview').style.display = "none";
             }
+            function submitRating(){
+                var rateValue = document.getElementById('customer-rating').value;
+                var comment = document.getElementById('customerIn').value;
+                console.log(comment);
+                var xhr = new XMLHttpRequest();
+                var url1 = '/postComment';
+                var param = 'rate='+rateValue+'&comment='+comment;
+
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4 && xhr.status == 200){
+                        console.log('post comment success')
+                    }
+
+                }
+                xhr.open('post',url1, true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send(param);
+                readmessage();
+            }
             function readmessage(){
                 container = document.getElementById('comment-container');
                 while (container.firstChild) {
-                    container.firstChild.remove()
+                     container.firstChild.remove()
                 }
                 //container.parentNode.removeChild(container);
-                var param = 'mode='+sortingMode;
-                
                 var xhr = new XMLHttpRequest();
-                var url2 = '/read';
+                var url2 = '/getComments';
+                
                 xhr.onreadystatechange = function()
                 {
                     if(xhr.readyState == 4 && xhr.status == 200) 
@@ -135,66 +154,29 @@
                         console.log(apiResult);
                     
                         apiResult.forEach((result, idx) => {
-                        // Create card element
-                        //const card = document.createElement('div');
-                        //card.classList = 'card-body';
+                        
+                            // Construct card content
+                            const content = `
+                            <div class="heading someroom2">
+                            <h3>${result.rating}/10</h3>
+                            <h3>"---${result.comment}---"</h3>
+                            </div>
+                            `
 
-                        // Construct card content
-                        const content = `
-                        <div class="room-card-container1">
-                            <img
-                            alt="image"
-                            src="./public/playground_assets/default-img.svg"
-                            class="room-card-image"
-                            />
-                            <div class="room-card-container2">
-                            <h1 class="room-card-text"><span>${result.name}</span></h1>
-                            <div class="room-card-container3">
-                                <div class="room-card-container4">
-                                <div class="room-card-container5">
-                                    <span class="room-card-text1"><span>${result.desc}</span></span>
-                                </div>
-                                <span class="room-card-text2"><span>${result.address}</span></span>
-                                </div>
-                                <span class="room-card-text3">
-                                <span>${isPetFriendly(result.pet)}</span>
-                                </span>
-                                <span class="room-card-text3">
-                                    <span>Owner's info: </span>
-                                </span>
-                                <span class="room-card-text3">
-                                    <span>Phone number: +1 (XXX)XXX-XXXX</span>
-                                </span>
-                            </div>
-                            </div>
-                            <div class="room-card-container6">
-                            <span class="room-card-text4"><span>$${result.price} CAD</span></span>
-                            <span class="room-card-text5"><span>Per Night</span></span>
-                            <a href="review.html">
-                                <div class="solid-button-container">
-                                <button class="solid-button-button button" onclick="selectRoom(${result.roomID})">
-                                    <span>View Room</span>
-                                </button>
-                                </div>
-                            </a>
-                            </div>
-                        </div>
-                        `
-
-                        // Append newyly created card element to the container
-                        container.innerHTML += content;
+                            // Append newyly created card element to the container
+                            container.innerHTML += content;
                         });
 
                         } 
                     }
             
-                xhr.open('post',url2, true);
+                xhr.open('get',url2, true);
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhr.send(param);
+                xhr.send();
             }
       
-      readmessage()
-      //setInterval(readmessage,500);
+            readmessage()
+            //setInterval(readmessage,500);
 
         </script>
         
