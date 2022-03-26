@@ -21,7 +21,7 @@ app.use(express.static('../frontEnd/the_actually_website'));
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'rootroot',
+    password: 'Assassin990118',
     database: 'cmpt370'
 });
 
@@ -158,18 +158,28 @@ app.post('/read', (req, res) => {
 
 // Delete rooms
 app.post('/delRoom', function(req,res){
-    var name = req.body.name;
-    let sql = 'DELETE FROM roominfo WHERE name=?';
+    var room_name = req.body.room_name;
+    var room_manager = req.body.room_manager;
+    let sql = 'SELECT manager FROM roominfo WHERE name=?';
 
-    console.log(name);
+    // console.log(room_name);
+    // console.log(room_manager);
 
-    mysqlConnection.query(sql,[name], (err, result) => {
+    mysqlConnection.query(sql, room_name, (err, result) => {
         if(err) throw err;
-        console.log(result);
-
+        else if (room_manager == result[0].manager) {
+            let sql1 = 'DELETE FROM roominfo WHERE name=?';
+            mysqlConnection.query(sql1, [room_name], (err, result) => {
+                if(err) throw err;
+                // console.log(result);
+                res.send("all done.");
+            });
+            // res.send("all done.")
+        }
+        else res.send("The room name and room manager do not match.")
+        // console.log(sql);
+        // console.log(result[0].manager);
     });
-
-    res.send("all done");
 })
 
 
