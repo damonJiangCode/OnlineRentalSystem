@@ -86,6 +86,7 @@ CREATE TABLE `roominfo` (
   `image` varchar(100) DEFAULT NULL,
   `star` int DEFAULT NULL,
   `price` int DEFAULT NULL,
+  `manager` varchar(100) DEFAULT NULL,
   `pet` tinyint DEFAULT NULL,
   `disabledAccess` tinyint DEFAULT NULL,
   `wifi` tinyint DEFAULT NULL,
