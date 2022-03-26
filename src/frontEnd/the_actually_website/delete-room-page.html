@@ -2,7 +2,7 @@
 
 <html lang="en">
   <head>
-    <title>Post Room Page</title>
+    <title>Delete Room Page</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
@@ -39,9 +39,9 @@
   <!-- start -->
   <body>
     <div>
-      <link href="./post-room-page.css" rel="stylesheet" />
+      <link href="./delete-room-page.css" rel="stylesheet" />
 
-      <div class="post-room-page-container">
+      <div class="delete-room-page-container">
         <div class="nav-bar-container nav-bar-root-class-name1">
           <nav data-role="Header" class="nav-bar-navbar">
             <a href="landing-page.html" class="nav-bar-navlink">
@@ -64,11 +64,11 @@
             </div>
           </nav>
         </div>
-        <h1 class="post-room-page-text">Post a room</h1>
-<!-- form for posting room -->
-        <div class="post-room-page-container1">
-          <form class="post-room-page-form" method="POST" action="/postRoom">
-            <span class="post-room-page-text1">Room Name</span>
+        <h1 class="post-room-page-text">Delete a room</h1>
+<!-- form for deleting room -->
+        <div class="delete-room-page-container1">
+          <form class="delete-room-page-form" method="POST" action="/delRoom">
+            <span class="delete-room-page-text1">Room Name</span>
             <input
               name="room_name"
               type="text"
@@ -77,51 +77,7 @@
               class="input"
             />
             <p><br></p>
-            
-            <!-- new dropdown menu -->
-            <label for="hotel-rating">Rate the Hotel/Room: </label>
-            <select name="star" id="hotel-rating">
-                <option value="1">One-Star</option>
-                <option value="2">Two-Star</option>
-                <option value="3">Three-Star</option>
-                <option value="4">Four-Star</option>
-                <option value="5">Five-Star</option>
-            </select>
-            <!-- new dropdown menu ends here -->
-
-            <p><br></p>
-            <span class="post-room-page-text1">Description</span>
-            <input
-              name="room_desc"
-              type="text"
-              placeholder="Enter the Description of the Hotel / Room"
-              autofocus="true"
-              class="input"
-            />
-            <p><br></p>
-            <span class="post-room-page-text1">Address</span>
-            <input
-              name="room_address"
-              type="text"
-              placeholder="Enter the Address of Hotel / Room"
-              autofocus="true"
-              class="input"
-            />
-            <p><br></p>
-            <span class="post-room-page-text1">Images</span>
-            <form action="/action_page.php">
-              <input type="file" id="myFile" name="filename">
-            <p><br></p>           
-            <span class="post-room-page-text1">Price</span>
-            <input
-              name="room_price"
-              type="text"
-              placeholder="Enter the Price Hotel / Room"
-              autofocus="true"
-              class="input"
-            />
-            <p><br></p>
-            <span class="post-room-page-text1">Manager</span>
+            <span class="delete-room-page-text1">Manager</span>
             <input
               name="room_manager"
               type="text"
@@ -130,34 +86,6 @@
               class="input"
             />
             <p><br></p>
-            <p>Select the amenities/features offered</p>
-            <br/>
-            
-          
-            <input type="checkbox" id="pet" name="pet" value="pet">
-            <label for="vehicle1"> Pets Friendly</label><br>
-            <input type="checkbox" id="Disable" name="Disable" value="Disable">
-            <label for="vehicle1"> Disabled Friendly</label><br>
-            <input type="checkbox" id="Wifi" name="Wifi" value="Wifi">
-            <label for="vehicle1"> Free Wifi</label><br>
-            <input type="checkbox" id="Pool" name="Pool" value="Pool">
-            <label for="vehicle1"> Swimming pool</label><br>
-            <input type="checkbox" id="Spa" name="Spa" value="Spa">
-            <label for="vehicle1"> Spa</label><br>
-            <input type="checkbox" id="Parking" name="Parking" value="Parking">
-            <label for="vehicle1"> Free Parking</label><br>
-            <input type="checkbox" id="Gym" name="Gym" value="Gym">
-            <label for="vehicle1"> Gym Room</label><br>
-            <input type="checkbox" id="AC" name="AC" value="AC">
-            <label for="vehicle1"> A/C</label><br>
-            <input type="checkbox" id="Food" name="Food" value="Food">
-            <label for="vehicle1"> Provide Meals</label><br>
-            <input type="checkbox" id="Bar" name="Bar" value="Bar">
-            <label for="vehicle1"> Bar</label><br>
-            <input type="checkbox" id="Laundry" name="Laundry" value="Laundry">
-            <label for="vehicle1"> Laundry</label>
-            <br>
-            <br>     
             <button class="solid-button-button button">
                 <span>Submit</span>
             </button>            
