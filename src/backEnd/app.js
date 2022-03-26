@@ -21,7 +21,7 @@ app.use(express.static('../frontEnd/the_actually_website'));
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'rootroot',
     database: 'cmpt370'
 });
 
@@ -34,6 +34,8 @@ mysqlConnection.connect((err) => {
         console.log('DB connection failed \n Error: '+ JSON.stringify(err,undefined,2));
 });
 
+// var for which room is selected
+var selectedRoom;
 
 // a function to check whether input (checkbox) is checked
 function parserInt(input) {
@@ -295,6 +297,14 @@ app.post('/addCustomer',(req,res) =>{
     });
     res.send("all done");
 });
+
+// route for getting the room id of selected room
+app.post('/selectRoom', (req, res) => {
+    //console.log(req.body);
+    selectedRoom = req.body.selectedRoom;
+    res.send("room "+selectedRoom+" is selected!")
+});
+
 
 
 
