@@ -85,7 +85,10 @@
             <!-- above section of code will be hidden before btn is clicked -->
         </div>
         <p><br></p>
-        <!-- reviews from users -->
+        <div class="comment-container">
+
+        </div>
+        <!-- reviews from users
         <div class="heading someroom2">
             <h3>?/10</h3>
             <h3>"---review from the user---"</h3>
@@ -102,7 +105,7 @@
             <h3>?/10</h3>
             <h3>"---review from the user---"</h3>
         </div>
-        <!-- ends -->
+        ends -->
         <script src="script.js"></script>
         <script type="text/javascript">
             // function for hiding or showing the writing review section
@@ -112,6 +115,88 @@
             function hideDiv(){
                 document.getElementById('wReview').style.display = "none";
             }
+            function readmessage(){
+                container = document.getElementById('comment-container');
+                while (container.firstChild) {
+                    container.firstChild.remove()
+                }
+                //container.parentNode.removeChild(container);
+                var param = 'mode='+sortingMode;
+                
+                var xhr = new XMLHttpRequest();
+                var url2 = '/read';
+                xhr.onreadystatechange = function()
+                {
+                    if(xhr.readyState == 4 && xhr.status == 200) 
+                    {
+                        
+                        const apiResult = JSON.parse(xhr.response);
+                        console.log(apiResult.constructor == Array);
+                        console.log(apiResult);
+                    
+                        apiResult.forEach((result, idx) => {
+                        // Create card element
+                        //const card = document.createElement('div');
+                        //card.classList = 'card-body';
+
+                        // Construct card content
+                        const content = `
+                        <div class="room-card-container1">
+                            <img
+                            alt="image"
+                            src="./public/playground_assets/default-img.svg"
+                            class="room-card-image"
+                            />
+                            <div class="room-card-container2">
+                            <h1 class="room-card-text"><span>${result.name}</span></h1>
+                            <div class="room-card-container3">
+                                <div class="room-card-container4">
+                                <div class="room-card-container5">
+                                    <span class="room-card-text1"><span>${result.desc}</span></span>
+                                </div>
+                                <span class="room-card-text2"><span>${result.address}</span></span>
+                                </div>
+                                <span class="room-card-text3">
+                                <span>${isPetFriendly(result.pet)}</span>
+                                </span>
+                                <span class="room-card-text3">
+                                    <span>Owner's info: </span>
+                                </span>
+                                <span class="room-card-text3">
+                                    <span>Phone number: +1 (XXX)XXX-XXXX</span>
+                                </span>
+                            </div>
+                            </div>
+                            <div class="room-card-container6">
+                            <span class="room-card-text4"><span>$${result.price} CAD</span></span>
+                            <span class="room-card-text5"><span>Per Night</span></span>
+                            <a href="review.html">
+                                <div class="solid-button-container">
+                                <button class="solid-button-button button" onclick="selectRoom(${result.roomID})">
+                                    <span>View Room</span>
+                                </button>
+                                </div>
+                            </a>
+                            </div>
+                        </div>
+                        `
+
+                        // Append newyly created card element to the container
+                        container.innerHTML += content;
+                        });
+
+                        } 
+                    }
+            
+                xhr.open('post',url2, true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send(param);
+            }
+      
+      readmessage()
+      //setInterval(readmessage,500);
+
         </script>
+        
     </body>
 </html>
