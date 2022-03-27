@@ -162,8 +162,8 @@ app.post('/delRoom', function(req,res){
     var room_manager = req.body.room_manager;
     let sql = 'SELECT manager FROM roominfo WHERE name=?';
 
-    // console.log(room_name);
-    // console.log(room_manager);
+    console.log(room_name);
+    console.log(room_manager);
 
     mysqlConnection.query(sql, room_name, (err, result) => {
         if(err) throw err;
@@ -171,14 +171,11 @@ app.post('/delRoom', function(req,res){
             let sql1 = 'DELETE FROM roominfo WHERE name=?';
             mysqlConnection.query(sql1, [room_name], (err, result) => {
                 if(err) throw err;
-                // console.log(result);
+                console.log(result);
                 res.send("all done.");
             });
-            // res.send("all done.")
         }
         else res.send("The room name and room manager do not match.")
-        // console.log(sql);
-        // console.log(result[0].manager);
     });
 })
 
