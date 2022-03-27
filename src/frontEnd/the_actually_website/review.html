@@ -70,6 +70,7 @@
                 <div class="center">
                     <form action="">
                         <input
+                        id="customerIn"
                         name="customer_comment"
                         type="text"
                         placeholder="---Type Review Here---"
@@ -79,13 +80,16 @@
                     </form>
                 </div>
                 <p><br></p>
-                <button class="btn3">Submit</button>
+                <button class="btn3" onclick="submitRating()">Submit</button>
                 <button class="btn2" onclick="hideDiv()">Cancel</button>
             </div>
             <!-- above section of code will be hidden before btn is clicked -->
         </div>
         <p><br></p>
-        <!-- reviews from users -->
+        <div id="comment-container">
+
+        </div>
+        <!-- reviews from users
         <div class="heading someroom2">
             <h3>?/10</h3>
             <h3>"---review from the user---"</h3>
@@ -102,7 +106,7 @@
             <h3>?/10</h3>
             <h3>"---review from the user---"</h3>
         </div>
-        <!-- ends -->
+        ends -->
         <script src="script.js"></script>
         <script type="text/javascript">
             // function for hiding or showing the writing review section
@@ -112,6 +116,69 @@
             function hideDiv(){
                 document.getElementById('wReview').style.display = "none";
             }
+            function submitRating(){
+                var rateValue = document.getElementById('customer-rating').value;
+                var comment = document.getElementById('customerIn').value;
+                console.log(comment);
+                var xhr = new XMLHttpRequest();
+                var url1 = '/postComment';
+                var param = 'rate='+rateValue+'&comment='+comment;
+
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4 && xhr.status == 200){
+                        console.log('post comment success')
+                    }
+
+                }
+                xhr.open('post',url1, true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send(param);
+                readmessage();
+            }
+            function readmessage(){
+                container = document.getElementById('comment-container');
+                while (container.firstChild) {
+                     container.firstChild.remove()
+                }
+                //container.parentNode.removeChild(container);
+                var xhr = new XMLHttpRequest();
+                var url2 = '/getComments';
+                
+                xhr.onreadystatechange = function()
+                {
+                    if(xhr.readyState == 4 && xhr.status == 200) 
+                    {
+                        
+                        const apiResult = JSON.parse(xhr.response);
+                        console.log(apiResult.constructor == Array);
+                        console.log(apiResult);
+                    
+                        apiResult.forEach((result, idx) => {
+                        
+                            // Construct card content
+                            const content = `
+                            <div class="heading someroom2">
+                            <h3>${result.rating}/10</h3>
+                            <h3>"---${result.comment}---"</h3>
+                            </div>
+                            `
+
+                            // Append newyly created card element to the container
+                            container.innerHTML += content;
+                        });
+
+                        } 
+                    }
+            
+                xhr.open('get',url2, true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send();
+            }
+      
+            readmessage()
+            //setInterval(readmessage,500);
+
         </script>
+        
     </body>
 </html>

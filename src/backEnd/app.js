@@ -21,7 +21,7 @@ app.use(express.static('../frontEnd/the_actually_website'));
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'Assassin990118',
     database: 'cmpt370'
 });
 
@@ -34,6 +34,8 @@ mysqlConnection.connect((err) => {
         console.log('DB connection failed \n Error: '+ JSON.stringify(err,undefined,2));
 });
 
+// var for which room is selected
+var selectedRoom = 0;
 
 // a function to check whether input (checkbox) is checked
 function parserInt(input) {
@@ -156,18 +158,28 @@ app.post('/read', (req, res) => {
 
 // Delete rooms
 app.post('/delRoom', function(req,res){
-    var name = req.body.name;
-    let sql = 'DELETE FROM roominfo WHERE name=?';
+    var room_name = req.body.room_name;
+    var room_manager = req.body.room_manager;
+    let sql = 'SELECT manager FROM roominfo WHERE name=?';
 
-    console.log(name);
+    // console.log(room_name);
+    // console.log(room_manager);
 
-    mysqlConnection.query(sql,[name], (err, result) => {
+    mysqlConnection.query(sql, room_name, (err, result) => {
         if(err) throw err;
-        console.log(result);
-
+        else if (room_manager == result[0].manager) {
+            let sql1 = 'DELETE FROM roominfo WHERE name=?';
+            mysqlConnection.query(sql1, [room_name], (err, result) => {
+                if(err) throw err;
+                // console.log(result);
+                res.send("all done.");
+            });
+            // res.send("all done.")
+        }
+        else res.send("The room name and room manager do not match.")
+        // console.log(sql);
+        // console.log(result[0].manager);
     });
-
-    res.send("all done");
 })
 
 
@@ -241,29 +253,33 @@ app.post('/login',(req, res) =>{
 });
 
 // add comments and rating
-app.post('/addComment',(req,res) =>{
-    var room_id = req.body.room_id;
-    var comment = req.body.comment;
-    var rating = req.body.rating;
-    var post = {room_id: room_id, comment: comment, rating: rating};
-    console.log(post);
+app.post('/postComment',(req,res) =>{
+    var room_id = selectedRoom;
+    if (room_id == 0){
+        res.send("no room")
+    } else {
+        var comment = req.body.comment;
+        var rate = req.body.rate;
+        var post = {room_id: room_id, comment: comment, rate: rate};
+        console.log(post);
 
 
-    mysqlConnection.query('INSERT INTO comments (room_id,comment,rating) VALUES (?,?,?)',[room_id,comment,rating], (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        console.log('added');
-    });
-    res.send("all done");
+        mysqlConnection.query('INSERT INTO comments (room_id,comment,rating) VALUES (?,?,?)',[room_id,comment,rate], (err, result) => {
+            if(err) throw err;
+            console.log(result);
+            console.log('added');
+        });
+        res.send("all done");
+    }  
 });
 
 
 // Get comments and ratings for a room
 app.get('/getComments',function(req,res){
-    var room_id = req.body.room_id;
+    var room_id = selectedRoom;
 
 
-    mysqlConnection.query('SELECT * FROM comments WHERE room_id = ?',room_id, (err, result) => {
+    mysqlConnection.query('SELECT * FROM comments WHERE room_id=?',room_id, (err, result) => {
         if(err) throw err;
         console.log(result);
         res.send(result);
@@ -295,6 +311,14 @@ app.post('/addCustomer',(req,res) =>{
     });
     res.send("all done");
 });
+
+// route for getting the room id of selected room
+app.post('/selectRoom', (req, res) => {
+    //console.log(req.body);
+    selectedRoom = req.body.selectedRoom;
+    res.send("room "+selectedRoom+" is selected!");
+});
+
 
 
 

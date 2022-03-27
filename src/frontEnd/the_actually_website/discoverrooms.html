@@ -381,6 +381,27 @@
           }
       }
 
+      function selectRoom(roomID){
+        console.log('selectedRoom='+roomID);
+        var xhr = new XMLHttpRequest();
+        var url1 = '/selectRoom';
+          
+        var params = 'selectedRoom='+roomID;
+        xhr.onreadystatechange = function()
+        {
+              
+          if(xhr.readyState == 4 && xhr.status == 200) 
+          {
+            console.log(xhr.responseText)
+          }   
+        };
+      
+        xhr.open('post', url1, true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send(params);
+
+      }
+
       
       function readmessage(){
           container = document.getElementById('card-container');
@@ -437,11 +458,14 @@
                     <div class="room-card-container6">
                       <span class="room-card-text4"><span>$${result.price} CAD</span></span>
                       <span class="room-card-text5"><span>Per Night</span></span>
-                      <div class="solid-button-container">
-                        <button class="solid-button-button button">
-                          <span>View Room</span>
-                        </button>
-                      </div>
+                     
+                      <a href="review.html">
+                        <div class="solid-button-container">
+                          <button class="solid-button-button button" onclick="selectRoom(${result.roomID})">
+                            <span>View Room</span>
+                          </button>
+                        </div>
+                      </a>
                     </div>
                   </div>
                   `
