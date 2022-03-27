@@ -21,7 +21,7 @@ app.use(express.static('../frontEnd/the_actually_website'));
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Assassin990118',
+    password: 'rootroot',
     database: 'cmpt370'
 });
 
