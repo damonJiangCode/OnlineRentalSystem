@@ -284,7 +284,7 @@ app.get('/getComments',function(req,res){
 })
 
 // add customers
-app.post('/addCustomer',(req,res) =>{
+app.post('/postCustomer',(req,res) =>{
     var customer_name = req.body.customer_name;
     var customer_email = req.body.customer_email;
     var customer_phone = req.body.customer_phone;
