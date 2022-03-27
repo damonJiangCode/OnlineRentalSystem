@@ -285,9 +285,10 @@ app.get('/getComments',function(req,res){
 
 // add customers
 app.post('/postCustomer',(req,res) =>{
-    var customer_name = req.body.customer_name;
-    var customer_email = req.body.customer_email;
-    var customer_phone = req.body.customer_phone;
+    console.log("customer added!")
+    var customer_name = req.body.name;
+    var customer_email = req.body.email;
+    var customer_phone = req.body.phone;
     var vegetarian = req.body.vegetarian;
     var vegan = req.body.vegan;
     var gluten = req.body.gluten;
