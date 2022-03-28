@@ -4,6 +4,7 @@ const express = require('express');
 var app = express();
 const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
+const fileupload = require('express-fileupload')
 
 app.use(express.json());
 
