@@ -67,10 +67,10 @@
         <h1 class="post-room-page-text">Enter your details</h1>
         <!-- form for posting room -->
         <div class="post-room-page-container1">
-            <form class="post-room-page-form" >
+            <form class="post-room-page-form" action="/addCustomer" method="post">
                 <span class="post-room-page-text1">Name</span>
                 <input
-                        name="room_name"
+                        name="customer_name"
                         type="text"
                         placeholder="Enter the name of the Hotel / Room"
                         autofocus="true"
@@ -81,7 +81,7 @@
                 <p><br></p>
                 <span class="post-room-page-text1">Email</span>
                 <input
-                        name="room_desc"
+                        name="customer_email"
                         type="text"
                         placeholder="Enter the Description of the Hotel / Room"
                         autofocus="true"
@@ -90,7 +90,7 @@
                 <p><br></p>
                 <span class="post-room-page-text1">Phone</span>
                 <input
-                        name="room_address"
+                        name="customer_phone"
                         type="text"
                         placeholder="Enter the Address of Hotel / Room"
                         autofocus="true"
@@ -102,11 +102,11 @@
                     <br/>
                 <br>
 
-                    <input type="checkbox" id="pet" name="pet" value="pet">
+                    <input type="checkbox" id="vegan" name="vegan" value="vegan">
                     <label for="vehicle1"> Vegan</label><br>
-                    <input type="checkbox" id="Disable" name="Disable" value="Disable">
+                    <input type="checkbox" id="vegetarian" name="vegetarian" value="vegetarian">
                     <label for="vehicle1"> Vegetarian</label><br>
-                    <input type="checkbox" id="Wifi" name="Wifi" value="Wifi">
+                    <input type="checkbox" id="gluten" name="gluten" value="gluten">
                     <label for="vehicle1"> Gluten-free</label><br>
                 <p><br></p>
                 <p><br></p>
@@ -114,15 +114,15 @@
                 <br/>
                 <br>
 
-                    <input type="checkbox" id="Pool" name="Pool" value="Pool">
+                    <input type="checkbox" id="deaf" name="deaf" value="deaf">
                     <label for="vehicle1"> Hearing-Impairment</label><br>
-                    <input type="checkbox" id="Spa" name="Spa" value="Spa">
+                    <input type="checkbox" id="blind" name="blind" value="blind">
                     <label for="vehicle1"> Visual-Impairment</label><br>
-                    <input type="checkbox" id="Parking" name="Parking" value="Parking">
+                    <input type="checkbox" id="wheelchair" name="wheelchair" value="wheelchair">
                     <label for="vehicle1"> Wheelchair-Access</label><br>
                     <br>
                     <br>
-                    <button class="solid-button-button button">
+                    <button class="solid-button-button button" type="submit">
                         <span>Submit</span>
                     </button>
                 </form>
