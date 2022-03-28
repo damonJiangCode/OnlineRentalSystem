@@ -4,9 +4,11 @@ const express = require('express');
 var app = express();
 const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
-
+const cors = require("cors");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 app.use(express.json());
-
+app.use(cors());
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
@@ -19,7 +21,7 @@ app.use(express.static('../frontEnd/the_actually_website'));
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'Assassin990118',
     database: 'cmpt370'
 });
 
@@ -72,10 +74,11 @@ app.post('/postRoom',function(req,res) {
     starIsValid = validInput(star)
     var price = req.body.room_price;
     priceIsValid = validInput(price)
-
+    var manager = req.body.room_manager;
+    managerIsValid = validInput(manager);
 
     // check whether the inputs are valid
-    if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0) {
+    if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0 || managerIsValid == 0) {
         console.log("Inputs should be valid!\n")
     }
     
@@ -90,18 +93,15 @@ app.post('/postRoom',function(req,res) {
     var food = parserInt(req.body.Food);
     var bar = parserInt(req.body.Bar);
     var laundry = parserInt(req.body.Laundry);
-    var manager = req.body.room_manager;
-    var manager_email = req.body.manager_email;
-    var manager_phone = req.body.manager_phone;
 
     var post = {
-        name: name,
-        manager:manager,
+        name: name, 
         desc: desc, 
         address: address,
         image: image,
         star: star,
         price:price,
+        manager: manager,
         pet:pet, 
         disabledAccess:disabledAccess, 
         wifi:wifi, 
@@ -112,9 +112,7 @@ app.post('/postRoom',function(req,res) {
         ac:ac, 
         food:food, 
         bar:bar, 
-        laundry:laundry,
-        manager_email:manager_email,
-        manager_phone:manager_phone
+        laundry:laundry
     };
     // console.log(post);
 
@@ -163,14 +161,18 @@ app.post('/read', (req, res) => {
 
 // Delete rooms
 app.post('/delRoom', function(req,res){
+
     var room_name = req.body.room_name;
     var room_manager = req.body.room_manager;
+
+    // console.log("room name:" + room_name);
+    // console.log("room manager:" + room_manager);
+
     let sql = 'SELECT manager FROM roominfo WHERE name=?';
 
-    // console.log(room_name);
-    // console.log(room_manager);
-
     mysqlConnection.query(sql, room_name, (err, result) => {
+        // console.log(result);
+        // console.log(result[0].manager);
         if(err) throw err;
         else if (room_manager == result[0].manager) {
             let sql1 = 'DELETE FROM roominfo WHERE name=?';
@@ -179,26 +181,31 @@ app.post('/delRoom', function(req,res){
                 // console.log(result);
                 res.send("all done.");
             });
-            // res.send("all done.")
         }
         else res.send("The room name and room manager do not match.")
-        // console.log(sql);
-        // console.log(result[0].manager);
     });
 })
 
 
 // Get all rooms
-app.post('/getRooms',function(req,res){
-    var manager=req.body.manager_name;
-    let sql = 'SELECT * FROM roominfo WHERE manager=?';
-    mysqlConnection.query(sql,manager, (err, result) => {
+app.get('/getRooms',function(req,res){
+    let sql = 'SELECT * FROM roominfo';
+    mysqlConnection.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
+
+        var response = '';
+    
+        for(let i = 0;i<result.length;i++){
+            response += JSON.stringify(result[i])+',';
+            
+        }
+        response.substring(0, response.length - 1);
+        console.log(response);
         res.send(result);
     });
 })
-/**
+
 // create manager account
 app.post('/createAccount',(req, res) => {
 
@@ -247,7 +254,7 @@ app.post('/login',(req, res) =>{
         }
 
     });
-});**/
+});
 
 // add comments and rating
 app.post('/postComment',(req,res) =>{
@@ -284,10 +291,11 @@ app.get('/getComments',function(req,res){
 })
 
 // add customers
-app.post('/addCustomer',(req,res) =>{
-    var customer_name = req.body.customer_name;
-    var customer_email = req.body.customer_email;
-    var customer_phone = req.body.customer_phone;
+app.post('/postCustomer',(req,res) =>{
+    console.log("customer added!")
+    var customer_name = req.body.name;
+    var customer_email = req.body.email;
+    var customer_phone = req.body.phone;
     var vegetarian = req.body.vegetarian;
     var vegan = req.body.vegan;
     var gluten = req.body.gluten;
