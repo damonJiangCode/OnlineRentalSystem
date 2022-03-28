@@ -21,7 +21,7 @@ app.use(express.static('../frontEnd/the_actually_website'));
 var mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'rootroot',
+    password: 'Assassin990118',
     database: 'cmpt370'
 });
 
@@ -74,9 +74,11 @@ app.post('/postRoom',function(req,res) {
     starIsValid = validInput(star)
     var price = req.body.room_price;
     priceIsValid = validInput(price)
+    var manager = req.body.room_manager;
+    managerIsValid = validInput(manager);
 
     // check whether the inputs are valid
-    if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0) {
+    if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0 || managerIsValid == 0) {
         console.log("Inputs should be valid!\n")
     }
     
@@ -99,6 +101,7 @@ app.post('/postRoom',function(req,res) {
         image: image,
         star: star,
         price:price,
+        manager: manager,
         pet:pet, 
         disabledAccess:disabledAccess, 
         wifi:wifi, 
@@ -158,20 +161,24 @@ app.post('/read', (req, res) => {
 
 // Delete rooms
 app.post('/delRoom', function(req,res){
+
     var room_name = req.body.room_name;
     var room_manager = req.body.room_manager;
+
+    // console.log("room name:" + room_name);
+    // console.log("room manager:" + room_manager);
+
     let sql = 'SELECT manager FROM roominfo WHERE name=?';
 
-    console.log(room_name);
-    console.log(room_manager);
-
     mysqlConnection.query(sql, room_name, (err, result) => {
+        // console.log(result);
+        // console.log(result[0].manager);
         if(err) throw err;
         else if (room_manager == result[0].manager) {
             let sql1 = 'DELETE FROM roominfo WHERE name=?';
             mysqlConnection.query(sql1, [room_name], (err, result) => {
                 if(err) throw err;
-                console.log(result);
+                // console.log(result);
                 res.send("all done.");
             });
         }
