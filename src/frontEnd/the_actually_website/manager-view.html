@@ -38,34 +38,162 @@
               type = "image/x-icon">
       </head>
       <body>
-          <link rel="stylesheet" href="./manager-view.css" rel="stylesheet" />
+          <link rel="stylesheet" href="./manager-view.css"  rel="stylesheet" />
           <!-- code start here -->
+          <div class="discoverrooms-container">
+              <div class="nav-bar-container nav-bar-root-class-name">
+                  <nav data-role="Header" class="nav-bar-navbar">
+                      <a href="landing-page.html" class="nav-bar-navlink">
+                          <h1 class="nav-bar-logo">
+                              <span><span>UrRoomSk</span></span>
+                          </h1>
+                      </a>
+                      <div class="nav-bar-right-side">
+                          <div class="nav-bar-links-container">
+                              <a href="landing-page.html" class="nav-bar-navlink1">
+                                  <span>Home</span>
+                              </a>
+                              <a href="aboutus.html" class="nav-bar-navlink2">
+                                  <span><span>About Us</span></span>
+                              </a>
+                              <a href="contactus.html" class="nav-bar-navlink3">
+                                  <span>Contact</span>
+                              </a>
+                              <a href="delete-room-page.html" class="nav-bar-navlink3">
+                                  <span>Delete Room</span>
+                              </a>
+                          </div>
+                      </div>
+                  </nav>
+              </div>
+
           <div class="heading someroom">
             <h1>Welcome Manager!</h1>
-            <h2>click the <mark class="red">ROOM BUTTON</mark> to delete room</h2>
+            <h2>click the <mark class="red">SUBMIT</mark> to see your rooms</h2>
           </div>
           <hr>
-          <!-- flexbox -->
-          <ul class="container someroom">
-                <button class="item">
-                    <h3>Room Name 1</h3>
-                </button>
-                <button class="item">
-                    <h3>Room Name 2</h3>
-                </button>
-                <button class="item">
-                    <h3>Room Name 3</h3>
-                </button>
-          </ul>
-          <!-- flexbox end -->
-          <ul class="container someroom">
-            <li class="item2">
-                <a href="post-room-page.html" target="_blank">
-                    <h3>Post A Room</h3>
-                </a>
-            </li>
-          </ul>
-          <!-- body code ends here -->
-        <script src="script.js"></script>
+              <div class="post-room-page-container1">
+                  <div class="post-room-page-form">
+                      <span class="post-room-page-text1">Manager Name</span>
+                      <input
+                              id="manager"
+                              name="manager_name"
+                              type="text"
+                              placeholder="Enter the name of the Manager"
+                              autofocus="true"
+                              class="input"
+                      />
+                      <p><br></p>
+                          <button onclick="getRooms()" class="solid-button-button button">
+                              <span>Submit</span>
+                          </button>
+                      </div>
+                  <div id="card-container-cover">
+                      <div id="card-container">
+
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+        <script type="text/javascript">
+
+
+
+            function getRooms(){
+                var manager_name=document.getElementById('manager').value;
+                console.log(manager_name)
+                var param = 'manager_name='+manager_name;
+                container = document.getElementById('card-container');
+                /**
+                while (container.firstChild) {
+                    container.firstChild.remove()
+                }**/
+
+                var xhr = new XMLHttpRequest();
+                var url2 = '/getRooms';
+
+
+
+                xhr.onreadystatechange = function()
+                {
+                    if(xhr.readyState == 4 && xhr.status == 200)
+                    {
+
+                        const apiResult = JSON.parse(xhr.response);
+                        console.log(apiResult.constructor == Array);
+                        console.log(apiResult);
+
+                        apiResult.forEach((result, idx) => {
+                            // Create card element
+                            //const card = document.createElement('div');
+                            //card.classList = 'card-body';
+
+                            // Construct card content
+                            const content = `
+                    <br>
+                  <div class="room-card-container1">
+                    <img
+                      alt="image"
+                      src="./public/playground_assets/default-img.svg"
+                      class="room-card-image"
+                    />
+                    <div class="room-card-container2">
+                      <h1 class="room-card-text"><span>${result.name}</span></h1>
+                      <div class="room-card-container3">
+                        <div class="room-card-container4">
+                          <div class="room-card-container5">
+                            <span class="room-card-text1"><span>${result.desc}</span></span>
+                          </div>
+                          <span class="room-card-text2"><span>${result.address}</span></span>
+                        </div>
+                        <span class="room-card-text3">
+                            <span>Owner's info: ${result.manager_name}</span>
+                          </span>
+                          <span class="room-card-text3">
+                            <span>Email: ${result.manager_email}</span>
+                          </span>
+                          <span class="room-card-text3">
+                            <span>Phone number: ${result.manager_phone}</span>
+                          </span>
+                      </div>
+                    </div>
+                    <div class="room-card-container6">
+                      <span class="room-card-text4"><span>$${result.price} CAD</span></span>
+                      <span class="room-card-text5"><span>Per Night</span></span>
+
+                      <a href="review.html">
+                        <div class="solid-button-container">
+                          <button class="solid-button-button button" onclick="selectRoom(${result.roomID})">
+                            <span>View Room</span>
+                          </button>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  `
+
+
+                            // Append newyly created card element to the container
+                            container.innerHTML += content;
+                        });
+
+                    }
+                }
+
+                xhr.open('post',url2, true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.send(param);
+            }
+
+            //readmessage()
+            //setInterval(readmessage,500);
+
+
+
+
+
+        </script>
       </body>
 </html>

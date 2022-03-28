@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <title>Customer Info</title>
+    <title>Create Account</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
@@ -65,33 +65,35 @@
         </div>
 
     <div class="post-room-page-container">
-     
+        <p><br></p>
         <h1 class="post-room-page-text">Create Manager Account</h1>
+        <p><br></p>
         <!-- form for posting room -->
         <div class="post-room-page-container1">
-            <form class="post-room-page-form" >
-                <span class="post-room-page-text1">Manager Name</span>
+            <div class="post-room-page-form" >
+                <span class="post-room-page-text1">Name</span>
                 
-                <input type="text" placeholder="Enter your Name" name="name" class="input"  autofocus="true" required="">
+                <input type="text" placeholder="Enter your Name" id="manager_name"  class="input"  autofocus="true" required="">
                 
-                <p><br></p>
+
 
                 <p><br></p>
-                <span class="post-room-page-text1">Manager Email</span>
-                <input type="email" placeholder="Enter a valid email address" id="email-f796" name="email" class="input" required="">
+                <span class="post-room-page-text1">Email</span>
+                <input type="email" placeholder="Enter a valid email address" id="manager_email"  class="input" required="">
+                <p><br></p>
+                <span class="post-room-page-text1">Phone</span>
+                <input  placeholder="Enter a valid email address" id="manager_phone"  class="input" required="">
                 
                 <p><br></p>
                 <span class="post-room-page-text1">Password</span>
-                <input type="text" placeholder="Enter your Password" id="Password-f796" name="Password" class="input" required="">
+                <input type="text" placeholder="Enter your Password" id="password1"  class="input" required="">
                 <p><br></p>
                 <span class="post-room-page-text1">Confirm Password</span>
-                <input type="text" placeholder="Enter your Password again" id="Password-f796" name="Password" class="input" required="">
+                <input type="text" placeholder="Enter your Password again" id="password2"  class="input" required="">
                 <p><br></p>
                     
-                    <button class="solid-button-button button">
-                        <span>Submit</span>
-                    </button>
-                </form>
+                    <button onclick="createAccount()" class="solid-button-button button" type="submit">Submit</button>
+                </div>
         </div>
         <!-- form ends -->
     </div>
@@ -214,16 +216,57 @@
     </div>
 </div>
 <script type="text/javascript">
-    /*function postRoom() {
-      var http = new XMLHttpRequest();
-      var post_url = '/postRoom';
-      var params = 'star=' + document.getElementById('hotel-raing').value;
-      http.open('POST', post_url, true);
-      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      http.send(params);
-      // console.log("params");
+
+    function confirmPassword(password1,password2){
+        return password1 === password2;
     }
-    */
+
+
+
+    function createAccount(){
+        console.log('login function called');
+        var http = new XMLHttpRequest();
+        var url = '/createAccount';
+        var manager_name = document.getElementById("manager_name").value;
+        var manager_email = document.getElementById("manager_email").value;
+        var manager_phone = document.getElementById("manager_phone").value;
+        var password1 = document.getElementById("password1").value;
+        var password2 = document.getElementById("password2").value;
+
+        if(confirmPassword(password1,password2)){
+            var password = password1;
+        }else{
+            alert("Passwords do not match")
+        }
+
+        console.log('login function called');
+
+
+        http.open('POST', url);
+        http.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+        http.send(JSON.stringify({ manager_name: manager_name, manager_password: password, manager_email: manager_email,
+            manager_phone:manager_phone }));
+
+        http.onreadystatechange = function()
+        {
+            if(http.readyState == 4 && http.status == 200)
+            {
+                var response = http.responseText;
+
+                if(response){
+                    alert("Account Created");
+                }
+                else
+                    alert("failed")
+            }
+
+        };
+    }
+
+
+
+
+
 </script>
 </body>
 <!-- ends -->

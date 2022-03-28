@@ -34,6 +34,7 @@
               type = "image/x-icon">
     </head>
     <body>
+
         <div class="centre">
             <h1 style="padding-top: 1em;">Manager Login</h1>
             <!--
@@ -47,35 +48,37 @@
                     <label>Password</label>
                 </div>
                 <input type="submit" value="Login">
-                <div class ="signup"> <a href="create_mamager_account2.html" >Don't have an account? Sign up</a> </div>
+                <div class ="signup"> <a href="create_manager_account2.html" >Don't have an account? Sign up</a> </div>
                 <div class ="lostpassword"><a href="1">Forget your possword?</a> </div>
                 <div class ="return"><a href="landing-page.html">Return to Homepage</a> </div>
 
             </form>
         </div> -->
             <div class="post-room-page-container1">
-                <form class="post-room-page-form" >
-                    <span class="post-room-page-text1">Manager Name</span>
-
-                    <input type="text" placeholder="Enter your Name" name="name" class="input"  autofocus="true" required="">
+                <div class="post-room-page-form" >
+                    <p><br></p>
+                    <span class="post-room-page-text1">Name</span>
+                    <input type="text" placeholder="Enter your Name" id="manager_name" name="name" class="input"  autofocus="true" required="">
 
                     <p><br></p>
 
                     <p><br></p>
                     <span class="post-room-page-text1">Password</span>
-                    <input type="text" placeholder="Enter your Password" id="Password-f796" name="Password" class="input" required="">
+                    <input type="text" placeholder="Enter your Password" id="manager_password" name="Password" class="input" required="">
                     <p><br></p>
 
-                    <button class="solid-button-button button">
-                        <span>Submit</span>
+                    <button onclick="login()" class="solid-button-button button">
+                        Submit
                     </button>
                     <p><br></p>
-                    <div class ="signup"> <a href="create_mamager_account2.html" >Don't have an account? Sign up</a> </div>
+                    <div class ="signup"> <a href="create_manager_account2.html" >Don't have an account? Sign up</a> </div>
                     <div class ="lostpassword"><a href="1">Forget your possword?</a> </div>
                     <div class ="return"><a href="landing-page.html">Return to Homepage</a> </div>
                     <p><br></p>
-                </form>
+                </div>
             </div>
+        </div>
+
         <script type="text/javascript">
 
             function login(){
@@ -83,6 +86,9 @@
                 var url = '/login';
                 var manager_name = document.getElementById("manager_name").value;
                 var manager_password = document.getElementById("manager_password").value;
+
+
+
 
                 console.log('login function called');
 
@@ -96,20 +102,15 @@
                     if(http.readyState == 4 && http.status == 200)
                     {
                         var response = http.responseText;
-                        if(response == 'logged in'){
-                            //alert(staffName + " Registered");
+                        if(response=="good"){
+
+                            location.replace("manager-view.html");
                         }
                         else
-                            alert(response.data.message)
+                            alert("Login Failed")
                     }
                 };
             }
-
-
-
-
-
         </script>
     </body>
-  
 </html>
