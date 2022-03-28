@@ -78,8 +78,13 @@ app.post('/postRoom',function(req,res) {
     managerIsValid = validInput(manager);
 
     // check whether the inputs are valid
-    if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0 || managerIsValid == 0) {
-        console.log("Inputs should be valid!\n")
+    if (typeof price != 'number') {
+        console.log('Price is invalid.');
+        res.send('Error occured, invalid input.');
+    } 
+    if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || starIsValid == 0 || priceIsValid == 0 || managerIsValid == 0) {
+        console.log("Inputs should be valid!\n");
+        res.send('Error occured, invalid inputs.');
     }
     
     var pet = parserInt(req.body.pet);
