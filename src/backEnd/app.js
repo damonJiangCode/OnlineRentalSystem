@@ -4,9 +4,11 @@ const express = require('express');
 var app = express();
 const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
-const fileupload = require('express-fileupload')
+const fileupload = require('express-fileupload');
+app.use(fileupload());
 
 app.use(express.json());
+
 
 
 app.use(bodyparser.urlencoded({extended:true}));
@@ -58,6 +60,20 @@ function validInput(input) {
 }
 
 
+// add picture
+app.post('/addPicture', (req, res)=>{
+    console.log("hahahha")
+    let picturename;
+    let uploadpath;
+    /*
+    if (!req.files || Object.keys(req.files).lenght == 0) {
+        return res.status(400).send("no files input")
+    }
+    */
+   picturename = req.files.picture;
+   console.log(picturename);
+});
+
 // Add a room
 app.post('/postRoom',function(req,res) {
     console.log(req.body);
@@ -74,6 +90,7 @@ app.post('/postRoom',function(req,res) {
     var price = req.body.room_price;
     priceIsValid = validInput(price)
 
+    
 
     // check whether the inputs are valid
     if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0) {
