@@ -4,8 +4,7 @@ const express = require('express');
 var app = express();
 const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
-const fileupload = require('express-fileupload');
-app.use(fileupload());
+
 
 app.use(express.json());
 
@@ -59,20 +58,6 @@ function validInput(input) {
     }
 }
 
-
-// add picture
-app.post('/addPicture', (req, res)=>{
-    console.log("hahahha")
-    let picturename;
-    let uploadpath;
-    /*
-    if (!req.files || Object.keys(req.files).lenght == 0) {
-        return res.status(400).send("no files input")
-    }
-    */
-   picturename = req.files.picture;
-   console.log(picturename);
-});
 
 // Add a room
 app.post('/postRoom',function(req,res) {
