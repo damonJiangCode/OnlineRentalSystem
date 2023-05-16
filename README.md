@@ -5,17 +5,16 @@
 # Getting started
 - Clone the repository
 ```
-git clone https://git.cs.usask.ca/hot848/cmpt370-group33.git 
+git clone https://github.com/damonJiangCode/OnlineRentalSystem.git
 ```
 - Install dependencies
 ```
-cd cmpt370-group33/src/backEnd
+cd OnlineRentalSystem/src/backEnd
 npm install express body-parser mysql
 
 ``` 
 - Setting up MySQL Schema
-Import https://git.cs.usask.ca/hot848/cmpt370-group33/-/blob/main/src/backEnd/cmpt370Dump4.sql to MySQL Schema
-(Full explanation in demo video)
+Import https://github.com/damonJiangCode/OnlineRentalSystem/-/blob/main/src/backEnd/cmpt370Dump4.sql to MySQL Schema
 
 - Build and run the project
 ```
