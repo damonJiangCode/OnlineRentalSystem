@@ -5,13 +5,11 @@ var app = express();
 const bodyparser = require('body-parser');
 const { disabled } = require('express/lib/application');
 
-
 app.use(express.json());
-
-
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
+
 
 // load pages
 app.use(express.static('../frontEnd/the_actually_website'));
@@ -29,9 +27,9 @@ var mysqlConnection = mysql.createConnection({
 // connect DB
 mysqlConnection.connect((err) => {
     if(!err)
-        console.log('DB connection successful');
+        console.log('database connection successful');
     else
-        console.log('DB connection failed \n Error: '+ JSON.stringify(err,undefined,2));
+        console.log('database connection failed \n Error: '+ JSON.stringify(err,undefined,2));
 });
 
 // var for which room is selected
@@ -59,7 +57,7 @@ function validInput(input) {
 }
 
 
-// Add a room
+//add room from provider
 app.post('/postRoom',function(req,res) {
     console.log(req.body);
     var name = req.body.room_name;
@@ -76,12 +74,12 @@ app.post('/postRoom',function(req,res) {
     priceIsValid = validInput(price)
 
     
-
     // check whether the inputs are valid
     if (nameIsValid == 0 || descIsValid == 0 || adressIsValid == 0 || imageIsValid == 0 || starIsValid == 0 || priceIsValid == 0) {
         console.log("Inputs should be valid!\n")
     }
     
+    // if not get the inputs
     var pet = parserInt(req.body.pet);
     var disabledAccess = parserInt(req.body.Disable);
     var wifi = parserInt(req.body.Wifi);
@@ -97,6 +95,7 @@ app.post('/postRoom',function(req,res) {
     var manager_email = req.body.manager_email;
     var manager_phone = req.body.manager_phone;
 
+    // wrap the data in a JSON structure
     var post = {
         name: name,
         manager:manager,
@@ -121,7 +120,8 @@ app.post('/postRoom',function(req,res) {
     };
     // console.log(post);
 
-    // insert the information from frontend to DB
+    
+    // insert the data set from frontend to DB
     var response = new Object();
     let sql = 'INSERT INTO roominfo SET ?';
     mysqlConnection.query(sql, post, (err, result) => {
@@ -139,10 +139,14 @@ app.post('/postRoom',function(req,res) {
 app.post('/read', (req, res) => {
     var sql = "SELECT * FROM roominfo";
     var mode = req.body.mode;
-    if (mode=='ap'){sql = "SELECT * FROM roominfo ORDER BY price ASC"}; // sort by ascending price order
-    if (mode=='dp'){sql = "SELECT * FROM roominfo ORDER BY price DESC"};// sort by descending price order
-    if (mode=='ar'){sql = "SELECT * FROM roominfo ORDER BY star ASC"};  // sort by ascending star order
-    if (mode=='dr'){sql = "SELECT * FROM roominfo ORDER BY star DESC"}; // sort by descending star order
+    // sort by ascending price order
+    if (mode=='ap'){sql = "SELECT * FROM roominfo ORDER BY price ASC"};
+    // sort by descending price order
+    if (mode=='dp'){sql = "SELECT * FROM roominfo ORDER BY price DESC"};
+    // sort by ascending star order
+    if (mode=='ar'){sql = "SELECT * FROM roominfo ORDER BY star ASC"};  
+    // sort by descending star order
+    if (mode=='dr'){sql = "SELECT * FROM roominfo ORDER BY star DESC"}; 
 
     //filtering
     if (mode=='pf'){sql = "SELECT * FROM cmpt370.roominfo WHERE pet = 1"};
@@ -164,7 +168,7 @@ app.post('/read', (req, res) => {
 });
 
 
-// Delete rooms
+// delete rooms
 app.post('/delRoom', function(req,res){
     var room_name = req.body.room_name;
     var room_manager = req.body.room_manager;
@@ -191,7 +195,7 @@ app.post('/delRoom', function(req,res){
 })
 
 
-// Get all rooms
+// get all rooms as a list
 app.post('/getRooms',function(req,res){
     var manager=req.body.manager_name;
     let sql = 'SELECT * FROM roominfo WHERE manager=?';
@@ -274,10 +278,9 @@ app.post('/postComment',(req,res) =>{
 });
 
 
-// Get comments and ratings for a room
+// get comments and ratings for a room
 app.get('/getComments',function(req,res){
     var room_id = selectedRoom;
-
 
     mysqlConnection.query('SELECT * FROM comments WHERE room_id=?',room_id, (err, result) => {
         if(err) throw err;
@@ -285,6 +288,7 @@ app.get('/getComments',function(req,res){
         res.send(result);
     });
 })
+
 
 // add customers
 app.post('/addCustomer',(req,res) =>{
@@ -302,7 +306,6 @@ app.post('/addCustomer',(req,res) =>{
         vegetarian: vegetarian, vegan: vegan, gluten: gluten, deaf: deaf, blind: blind, wheelchair: wheelchair};
     console.log(post);
 
-
     mysqlConnection.query('INSERT INTO customerinfo (customer_name,customer_email,customer_phone,vegetarian,vegan,gluten,deaf,blind,wheelchair) VALUES (?,?,?,?,?,?,?,?,?)',
         [customer_name,customer_email,customer_phone,vegetarian,vegan,gluten,deaf,blind,wheelchair], (err, result) => {
         if(err) throw err;
@@ -318,13 +321,6 @@ app.post('/selectRoom', (req, res) => {
     selectedRoom = req.body.selectedRoom;
     res.send("room "+selectedRoom+" is selected!");
 });
-
-
-
-
-
-
-
 
 
 var port = 3000;
