@@ -14,7 +14,7 @@ npm install express body-parser mysql
 
 ``` 
 - Setting up MySQL Schema
-Import https://github.com/damonJiangCode/OnlineRentalSystem/-/blob/main/src/backEnd/cmpt370Dump4.sql to MySQL Schema
+Import https://github.com/damonJiangCode/OnlineRentalSystem/blob/main/src/backEnd/cmpt370Dump4.sql to MySQL Schema
 
 - Build and run the project
 ```
